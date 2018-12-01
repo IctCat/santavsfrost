@@ -14,6 +14,12 @@ public class SantaComponent : MonoBehaviour
     [SerializeField]
     private float HorizontalMovementRange = 3;
 
+    [SerializeField]
+    private float HorizontalAcceleration = 4f;
+
+    [SerializeField]
+    private float MaximumHorizontalSpeed = 1f;
+
     private PlayerInput PlayerInput;
 
     private Transform Transform;
@@ -72,14 +78,12 @@ public class SantaComponent : MonoBehaviour
         }
 
         // Horizontal movement
-        float acceleration = 2f;
         float x = this.PlayerInput.GetHorizontalAxis(PlayerInput.Stick.Left);
 
         Vector2 targetOffset = new Vector2(x, 0);
-        this.TargetOffset = Vector2.MoveTowards(this.TargetOffset, targetOffset, acceleration * Time.fixedDeltaTime);
+        this.TargetOffset = Vector2.MoveTowards(this.TargetOffset, targetOffset, this.HorizontalAcceleration * Time.fixedDeltaTime);
 
-        float maxSpeed = 0.75f;
-        float speed = Mathf.Min(maxSpeed, maxSpeed * Vector2.Distance(this.AnchorPosition, this.TargetOffset));
+        float speed = Mathf.Min(this.MaximumHorizontalSpeed, this.MaximumHorizontalSpeed * Vector2.Distance(this.AnchorPosition, this.TargetOffset));
 
         Vector2 offset = this.HorizontalMovementRange * this.TargetOffset;
 

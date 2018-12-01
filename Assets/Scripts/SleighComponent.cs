@@ -7,7 +7,7 @@ public class SleighComponent : SleighUnitComponent
     [SerializeField]
     private float DiveForce = 10;
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!GameControl.instance.gameOver)
         {

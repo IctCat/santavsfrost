@@ -120,44 +120,40 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalPosition.x
       value: -9.78
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4092881860673932, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+    - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 1311466797220044, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
-      propertyPath: m_Name
-      value: Santa
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
+  m_SourcePrefab: {fileID: 100100000, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &433713201
 GameObject:
@@ -344,7 +340,7 @@ MonoBehaviour:
   spawnOrder: 0 1 0 1 0 1
   exitBorder: -15
   entryBorder: 15
-  spawnHeight: -2
+  spawnHeight: 2
   obstacleSpacing: 10
 --- !u!114 &1244831760
 MonoBehaviour:
