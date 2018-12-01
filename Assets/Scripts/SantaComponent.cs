@@ -9,10 +9,25 @@ public class SantaComponent : MonoBehaviour
     private GameObject ReindeerPrefab;
 
     [SerializeField]
+    private GameObject GiftPrefab;
+
+    [SerializeField]
+    private Sprite[] SackSprites;
+
+    [SerializeField]
+    private Rigidbody2D SantaRigidbody;
+
+    [SerializeField]
     private int InitialReindeerCount = 4;
 
     [SerializeField]
     private float HorizontalMovementRange = 3;
+
+    [SerializeField]
+    private float HorizontalAcceleration = 4f;
+
+    [SerializeField]
+    private float MaximumHorizontalSpeed = 1f;
 
     private PlayerInput PlayerInput;
 
@@ -71,15 +86,18 @@ public class SantaComponent : MonoBehaviour
             this.ActiveReindeerJump(3);
         }
 
+        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.R1))
+        {
+            this.DropGift();
+        }
+
         // Horizontal movement
-        float acceleration = 2f;
         float x = this.PlayerInput.GetHorizontalAxis(PlayerInput.Stick.Left);
 
         Vector2 targetOffset = new Vector2(x, 0);
-        this.TargetOffset = Vector2.MoveTowards(this.TargetOffset, targetOffset, acceleration * Time.fixedDeltaTime);
+        this.TargetOffset = Vector2.MoveTowards(this.TargetOffset, targetOffset, this.HorizontalAcceleration * Time.fixedDeltaTime);
 
-        float maxSpeed = 0.75f;
-        float speed = Mathf.Min(maxSpeed, maxSpeed * Vector2.Distance(this.AnchorPosition, this.TargetOffset));
+        float speed = Mathf.Min(this.MaximumHorizontalSpeed, this.MaximumHorizontalSpeed * Vector2.Distance(this.AnchorPosition, this.TargetOffset));
 
         Vector2 offset = this.HorizontalMovementRange * this.TargetOffset;
 
@@ -120,6 +138,14 @@ public class SantaComponent : MonoBehaviour
 
         // Reset input
         this.PlayerInput.ResetInput();
+    }
+
+    public void DropGift()
+    {
+        GameObject go = Object.Instantiate<GameObject>(this.GiftPrefab, null, false);
+        go.transform.position = this.Sleigh.GiftDropAnchor.position;
+        Rigidbody2D rigidbody = go.GetComponent<Rigidbody2D>();
+        rigidbody.AddForce(Quaternion.AngleAxis(-15, Vector3.forward) * Vector3.up * 2f, ForceMode2D.Impulse);
     }
 
     public void AddReindeer()
@@ -213,6 +239,10 @@ public class SantaComponent : MonoBehaviour
             this.ReleaseReindeer(this.Reindeers[0]);
             this.Reindeers.RemoveAt(0);
         }
+
+        this.SantaRigidbody.simulated = true;
+        this.SantaRigidbody.AddForce(Vector2.up * Random.Range(1.5f, 2.5f), ForceMode2D.Impulse);
+        this.SantaRigidbody.AddTorque(Random.Range(1.5f, 3.5f), ForceMode2D.Impulse);
     }
 
     private Vector2 ReindeerTargetPosition(int index, bool initializeY)

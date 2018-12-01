@@ -33,7 +33,7 @@ public class ReindeerComponent : SleighUnitComponent
         this.JumpCooldownTimestamp = Time.time;
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public void OnTriggerEnter2D(Collider2D collider)
     {
         if (this.Attached)
         {
