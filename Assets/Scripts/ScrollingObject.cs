@@ -13,7 +13,7 @@ public class ScrollingObject : MonoBehaviour
 		rb2d = GetComponent<Rigidbody2D>();
 
 		//Start the object moving.
-		rb2d.velocity = new Vector2 (GameControl.instance.scrollSpeed, 0);
+		rb2d.velocity = new Vector2 (GameControl.instance.ScrollSpeed, 0);
 	}
 
 	void Update()

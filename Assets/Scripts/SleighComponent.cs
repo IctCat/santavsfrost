@@ -9,7 +9,11 @@ public class SleighComponent : SleighUnitComponent
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        GameControl.instance.SantaDied();
+        if (!GameControl.instance.gameOver)
+        {
+            GameControl.instance.Santa.ReleaseSleigh();
+            GameControl.instance.SantaDied();
+        }
     }
 
     public void AddVerticalForce(float force)

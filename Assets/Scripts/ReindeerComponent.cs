@@ -7,6 +7,9 @@ public class ReindeerComponent : SleighUnitComponent
     public SpringJoint2D SpringJoint { get; private set; }
     public LineRenderer LineRenderer { get; private set; }
 
+    [System.NonSerialized]
+    public bool Attached;
+
     [SerializeField]
     private float JumpForce = 10;
 
@@ -32,7 +35,10 @@ public class ReindeerComponent : SleighUnitComponent
 
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        GameControl.instance.Santa.RemoveReindeer(this);
+        if (this.Attached)
+        {
+            GameControl.instance.Santa.RemoveReindeer(this);
+        }
     }
 
     public void Jump()
