@@ -25,6 +25,11 @@ public class ReindeerComponent : SleighUnitComponent
         this.JumpCooldownTimestamp = Time.time;
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameControl.instance.Santa.RemoveReindeer(this);
+    }
+
     public void Jump()
     {
         if (this.JumpCooldownTimestamp <= Time.time)
