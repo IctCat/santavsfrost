@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using XInputDotNetPure;
 
 public class SantaComponent : MonoBehaviour
 {
@@ -14,8 +14,7 @@ public class SantaComponent : MonoBehaviour
     [SerializeField]
     private float HorizontalMovementRange = 3;
 
-    [System.NonSerialized]
-    public PlayerInput PlayerInput;
+    private PlayerInput PlayerInput;
 
     private Transform Transform;
 
@@ -27,7 +26,7 @@ public class SantaComponent : MonoBehaviour
 
     public void Start()
     {
-        this.PlayerInput = new PlayerInput();
+        this.PlayerInput = new PlayerInput(PlayerIndex.One, PlayerInput.KeyboardLayout.NumberRow);
 
         this.InitialReindeerCount = Mathf.Clamp(this.InitialReindeerCount, 1, 4);
 
