@@ -48,8 +48,8 @@ public class PlayerInput
         }
     }
 
-    private PlayerIndex PlayerIndex;
-    private KeyboardLayout Layout;
+    public PlayerIndex PlayerIndex;
+    public KeyboardLayout Layout;
 
     private InputButtonState[] InputButtonStates;
 
