@@ -9,6 +9,9 @@ public class SantaComponent : MonoBehaviour
     private GameObject ReindeerPrefab;
 
     [SerializeField]
+    private Rigidbody2D SantaRigidbody;
+
+    [SerializeField]
     private int InitialReindeerCount = 4;
 
     [SerializeField]
@@ -217,6 +220,10 @@ public class SantaComponent : MonoBehaviour
             this.ReleaseReindeer(this.Reindeers[0]);
             this.Reindeers.RemoveAt(0);
         }
+
+        this.SantaRigidbody.simulated = true;
+        this.SantaRigidbody.AddForce(Vector2.up * Random.Range(1.5f, 2.5f), ForceMode2D.Impulse);
+        this.SantaRigidbody.AddTorque(Random.Range(1.5f, 3.5f), ForceMode2D.Impulse);
     }
 
     private Vector2 ReindeerTargetPosition(int index, bool initializeY)
