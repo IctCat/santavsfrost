@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FrostSkills : MonoBehaviour {
-    public static FrostSkills Instance;
     public bool Blizzard = false;
     public bool ManualLaunch = false;
 
@@ -24,18 +23,11 @@ public class FrostSkills : MonoBehaviour {
     }
 
     public float ThrowForce = 30.0f;
-    public GameObject SantaPlayer;
     public float BlizzardInterval = 0.9f;
     public float BlizzardDuration = 4.6f;
-    Rigidbody2D[] _sleighBodies;
     float _blizzardTimer = 0;
     float _blizzardDurationTimer = 0;
-    private void Awake()
-    {
-        Instance = this;
-        SantaPlayer = GameObject.FindGameObjectWithTag("SantaPlayer");
-        _sleighBodies = SantaPlayer.GetComponentsInChildren<Rigidbody2D>();
-    }
+
     // Use this for initialization
     void Start () {
 		
@@ -59,7 +51,7 @@ public class FrostSkills : MonoBehaviour {
 
             if (_blizzardTimer < 0)
             {
-                foreach (Rigidbody2D rb in _sleighBodies)
+                foreach (Rigidbody2D rb in GameControl.instance.Santa.SleighBodies)
                 {
                     rb.AddForce(Vector2.up * (UnityEngine.Random.value * 2 - 1) * ThrowForce, ForceMode2D.Impulse);
                 }

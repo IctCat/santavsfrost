@@ -32,6 +32,9 @@ public class SantaComponent : MonoBehaviour
     [SerializeField]
     private float MaximumHorizontalSpeed = 1f;
 
+    [System.NonSerialized]
+    public Rigidbody2D[] SleighBodies;
+
     private PlayerInput PlayerInput;
 
     private Transform Transform;
@@ -56,6 +59,8 @@ public class SantaComponent : MonoBehaviour
             this.PlayerInput = new PlayerInput(PlayerIndex.Two, PlayerInput.KeyboardLayout.NumPad);
         }
 
+        GameControl.instance.Santa = this;
+
         this.InitialReindeerCount = Mathf.Clamp(this.InitialReindeerCount, 1, 4);
 
         this.Transform = this.GetComponent<Transform>();
@@ -70,6 +75,8 @@ public class SantaComponent : MonoBehaviour
         {
             this.AddReindeer();
         }
+
+        this.SleighBodies = this.GetComponentsInChildren<Rigidbody2D>();
 
         this.RestockGifts();
     }

@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 4207787492597496}
   - component: {fileID: 114276679907972504}
   - component: {fileID: 61868119787218434}
-  - component: {fileID: 114749951314266416}
   m_Layer: 8
   m_Name: GameControl
   m_TagString: Untagged
@@ -274,25 +273,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1ScoreText: {fileID: 114936594123518076}
   Player2ScoreText: {fileID: 114095971429194318}
+  SantaPrefab: {fileID: 1344622475544702, guid: 1007318d97c9b774981d7ef070ed2c6f,
+    type: 2}
+  FrostPrefab: {fileID: 1369866162087974, guid: e50f09f4b95c86c42b116ba7b93542fb,
+    type: 2}
   gameOver: 0
-  ScrollSpeed: -2
---- !u!114 &114749951314266416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401823129710428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1678f9599639b4182d275445a625f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Blizzard: 0
-  ManualLaunch: 0
-  ThrowForce: 30
-  SantaPlayer: {fileID: 0}
-  BlizzardInterval: 0.9
-  BlizzardDuration: 4.6
+  ScrollSpeed: -10
 --- !u!114 &114900534212711830
 MonoBehaviour:
   m_ObjectHideFlags: 1
