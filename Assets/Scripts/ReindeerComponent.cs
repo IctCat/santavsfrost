@@ -5,6 +5,7 @@ using UnityEngine;
 public class ReindeerComponent : SleighUnitComponent
 {
     public SpringJoint2D SpringJoint { get; private set; }
+    public LineRenderer LineRenderer { get; private set; }
 
     [SerializeField]
     private float JumpForce = 10;
@@ -12,12 +13,16 @@ public class ReindeerComponent : SleighUnitComponent
     [SerializeField]
     private float JumpCooldown = 1;
 
+    [SerializeField]
+    private float MaximumJumpStartHeight = 5;
+
     private float JumpCooldownTimestamp;
 
     public override void Initialize()
     {
         base.Initialize();
         this.SpringJoint = this.GetComponent<SpringJoint2D>();
+        this.LineRenderer = this.GetComponentInChildren<LineRenderer>();
     }
 
     public void Start()
@@ -25,11 +30,34 @@ public class ReindeerComponent : SleighUnitComponent
         this.JumpCooldownTimestamp = Time.time;
     }
 
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        GameControl.instance.Santa.RemoveReindeer(this);
+    }
+
     public void Jump()
     {
         if (this.JumpCooldownTimestamp <= Time.time)
         {
-            this.Rigidbody.AddForce(Vector2.up * this.JumpForce * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            float scale;
+
+            if (this.Transform.position.y > 0)
+            {
+                if (this.Transform.position.y < this.MaximumJumpStartHeight)
+                {
+                    scale = 1 - Mathf.Pow(this.Transform.position.y / this.MaximumJumpStartHeight, 2);
+                }
+                else
+                {
+                    scale = 0;
+                }
+            }
+            else
+            {
+                scale = 1;
+            }
+
+            this.Rigidbody.AddForce(Vector2.up * this.JumpForce * scale * Time.fixedDeltaTime, ForceMode2D.Impulse);
             this.JumpCooldownTimestamp = Time.time + this.JumpCooldown;
         }
     }

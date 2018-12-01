@@ -19,6 +19,12 @@ public class PlayerInput
         Right
     }
 
+    public enum KeyboardLayout
+    {
+        NumberRow,
+        NumPad
+    }
+
     private class InputButtonState
     {
         public Button Button;
@@ -41,20 +47,26 @@ public class PlayerInput
         }
     }
 
-    [SerializeField]
-    private PlayerIndex PlayerIndex = PlayerIndex.One;
+    private PlayerIndex PlayerIndex;
+    private KeyboardLayout Layout;
 
     private InputButtonState[] InputButtonStates;
 
     private const string InputHorizontal = "Horizontal";
     private const string InputVertical = "Vertical";
-    private const string InputReindeerA = "Reindeer A";
-    private const string InputReindeerB = "Reindeer B";
-    private const string InputReindeerX = "Reindeer X";
-    private const string InputReindeerY = "Reindeer Y";
+    private const string InputSanta1 = "Santa 1";
+    private const string InputSanta2 = "Santa 2";
+    private const string InputSanta3 = "Santa 3";
+    private const string InputSanta4 = "Santa 4";
+    private const string InputFrost1 = "Frost 1";
+    private const string InputFrost2 = "Frost 2";
+    private const string InputFrost3 = "Frost 3";
+    private const string InputFrost4 = "Frost 4";
 
-    public PlayerInput()
+    public PlayerInput(PlayerIndex index, KeyboardLayout layout)
     {
+        this.PlayerIndex = index;
+        this.Layout = layout;
         this.Initialize();
     }
 
@@ -82,16 +94,36 @@ public class PlayerInput
             switch (this.InputButtonStates[i].Button)
             {
                 case Button.A:
-                    pressed = (state.Buttons.A == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerA);
+                    pressed = (state.Buttons.A == ButtonState.Pressed);
+                    switch (this.Layout)
+                    {
+                        case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta1); break;
+                        case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost1); break;
+                    }
                     break;
                 case Button.B:
-                    pressed = (state.Buttons.B == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerB);
+                    pressed = (state.Buttons.B == ButtonState.Pressed);
+                    switch (this.Layout)
+                    {
+                        case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta2); break;
+                        case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost2); break;
+                    }
                     break;
                 case Button.X:
-                    pressed = (state.Buttons.X == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerX);
+                    pressed = (state.Buttons.X == ButtonState.Pressed);
+                    switch (this.Layout)
+                    {
+                        case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta3); break;
+                        case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost3); break;
+                    }
                     break;
                 case Button.Y:
-                    pressed = (state.Buttons.Y == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerY);
+                    pressed = (state.Buttons.Y == ButtonState.Pressed);
+                    switch (this.Layout)
+                    {
+                        case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta4); break;
+                        case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost4); break;
+                    }
                     break;
             }
 
