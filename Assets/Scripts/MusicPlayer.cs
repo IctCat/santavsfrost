@@ -12,7 +12,6 @@ public class MusicPlayer : MonoBehaviour {
     public static int Stage = 0;
     AudioSource _as;
     public float FadeInRate = 0.01f;
-    bool _fadedIn = false;
 
     private void Awake()
     {

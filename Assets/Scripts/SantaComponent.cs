@@ -45,6 +45,8 @@ public class SantaComponent : MonoBehaviour
     private int GiftCount;
     private int MaximumGiftCount { get { return this.SackSprites.Length - 1;  } }
 
+    public AudioClip[] Hohos;
+
     public void Start()
     {
         if (GameControl.Player1Santa)
@@ -169,6 +171,8 @@ public class SantaComponent : MonoBehaviour
 
             this.GiftCount--;
             this.SackRenderer.sprite = this.SackSprites[this.MaximumGiftCount - this.GiftCount];
+
+            SFXPlayer.Instance.Play(Hohos[Random.Range(0, Hohos.Length)]);
         }
     }
 
