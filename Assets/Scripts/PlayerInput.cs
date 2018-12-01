@@ -10,6 +10,7 @@ public class PlayerInput
         B,
         X,
         Y,
+        R1,
         Count
     }
 
@@ -54,10 +55,12 @@ public class PlayerInput
 
     private const string InputHorizontal = "Horizontal";
     private const string InputVertical = "Vertical";
+    private const string InputSanta0 = "Santa 0";
     private const string InputSanta1 = "Santa 1";
     private const string InputSanta2 = "Santa 2";
     private const string InputSanta3 = "Santa 3";
     private const string InputSanta4 = "Santa 4";
+    private const string InputFrost0 = "Frost 0";
     private const string InputFrost1 = "Frost 1";
     private const string InputFrost2 = "Frost 2";
     private const string InputFrost3 = "Frost 3";
@@ -123,6 +126,14 @@ public class PlayerInput
                     {
                         case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta4); break;
                         case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost4); break;
+                    }
+                    break;
+                case Button.R1:
+                    pressed = (state.Buttons.RightShoulder == ButtonState.Pressed);
+                    switch (this.Layout)
+                    {
+                        case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta0); break;
+                        case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost0); break;
                     }
                     break;
             }

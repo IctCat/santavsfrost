@@ -13,6 +13,11 @@ public class ScrollingStaticObject : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+        if (GameControl.instance.gameOver)
+        {
+            return;
+        }
+
         _r.material.mainTextureOffset += ScrollSpeed / 1000.0f;
 	}
 }
