@@ -156,10 +156,6 @@ Prefab:
       propertyPath: m_Name
       value: Santa
       objectReference: {fileID: 0}
-    - target: {fileID: 4255896302668310, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9d463af1fc993845a59a0920760cc65, type: 2}
   m_IsPrefabAsset: 0
