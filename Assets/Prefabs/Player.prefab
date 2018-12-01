@@ -132,7 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3142355a4606f6a43923aef343c51964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VerticalSteerForce: 100
+  DiveForce: 300
 --- !u!114 &114959745680979660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +147,7 @@ MonoBehaviour:
   ReindeerPrefab: {fileID: 1861753917986566, guid: 85258637684179943afb8a544c20440a,
     type: 2}
   InitialReindeerCount: 7
+  HorizontalMovementRange: 3
 --- !u!212 &212161461034217084
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -190,6 +191,6 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

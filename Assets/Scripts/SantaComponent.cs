@@ -11,6 +11,9 @@ public class SantaComponent : MonoBehaviour
     [SerializeField]
     private int InitialReindeerCount = 4;
 
+    [SerializeField]
+    private float HorizontalMovementRange = 3;
+
     [System.NonSerialized]
     public PlayerInput PlayerInput;
 
@@ -90,10 +93,19 @@ public class SantaComponent : MonoBehaviour
         float maxSpeed = 0.5f;
         float speed = Mathf.Min(maxSpeed, maxSpeed * Vector2.Distance(this.Transform.position, this.TargetPosition));
 
-        Vector2 target = 2 * this.TargetPosition;
+        Vector2 target = this.HorizontalMovementRange * this.TargetPosition;
 
         this.Transform.position = Vector2.MoveTowards(this.Transform.position, target, speed * Time.fixedDeltaTime);
 
+        // Vertical force (downwards)
+        float y = this.PlayerInput.GetVerticalAxis(PlayerInput.Stick.Left);
+
+        if (y < 0)
+        {
+            this.Sleigh.AddVerticalForce(y * Time.fixedDeltaTime);
+        }
+
+        // Reset input
         this.PlayerInput.ResetInput();
     }
 

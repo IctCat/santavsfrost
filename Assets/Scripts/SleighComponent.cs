@@ -4,5 +4,11 @@ using UnityEngine;
 
 public class SleighComponent : SleighUnitComponent
 {
+    [SerializeField]
+    private float DiveForce = 10;
 
+    public void AddVerticalForce(float force)
+    {
+        this.Rigidbody.AddForce(Vector2.up * force * this.DiveForce, ForceMode2D.Force);
+    }
 }
