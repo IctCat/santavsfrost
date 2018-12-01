@@ -19,6 +19,11 @@ public class Aurora : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+        if (GameControl.instance.gameOver)
+        {
+            return;
+        }
+
         _chanceTimer -= Time.deltaTime;
 		if(!Showing && _chanceTimer <= 0 && Random.value < Chance)
         {
