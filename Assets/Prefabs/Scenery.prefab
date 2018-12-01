@@ -39,6 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159921939127892}
   - component: {fileID: 212567929407665254}
+  - component: {fileID: 114075546425545718}
   m_Layer: 0
   m_Name: sky
   m_TagString: Untagged
@@ -178,8 +179,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1767662550065856}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10.889998, y: -11.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4506743242693548}
@@ -193,7 +194,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1682047620311574}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.6, y: 3.5, z: 0}
+  m_LocalPosition: {x: 34.9, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4175502806027640}
@@ -206,7 +207,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282616573039580}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 48, y: -8, z: 0}
+  m_LocalPosition: {x: 37.110443, y: -11.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4923460984035632}
@@ -316,6 +317,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 48, y: 1.62}
   m_EdgeRadius: 0
+--- !u!114 &114075546425545718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404911830250038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c12aff466ae47d46926e5d0d448deb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollSpeed: {x: 0.05, y: 0}
 --- !u!114 &114113521141780342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,7 +426,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 908f35a923e6874429e63a9d54035b24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -484,7 +497,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 089dd3c6d5fa2d84fa81e3e7385facd5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
