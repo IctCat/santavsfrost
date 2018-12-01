@@ -8,6 +8,8 @@ public class PlayerInput
     public enum Button {
         A,
         B,
+        X,
+        Y,
         Count
     }
 
@@ -74,6 +76,8 @@ public class PlayerInput
             {
                 case Button.A: pressed = state.Buttons.A == ButtonState.Pressed; break;
                 case Button.B: pressed = state.Buttons.B == ButtonState.Pressed; break;
+                case Button.X: pressed = state.Buttons.X == ButtonState.Pressed; break;
+                case Button.Y: pressed = state.Buttons.Y == ButtonState.Pressed; break;
             }
 
             if (pressed)
