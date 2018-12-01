@@ -9,7 +9,7 @@ public class FrostSpike : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         _rb = GetComponent<Rigidbody2D>();
-        _rb.simulated = false;
+        _rb.simulated = true;
         FrostSkills.Instance.SpikeAvailable(this);
 	}
 	
