@@ -338,13 +338,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb9db8485ccb24efebb0303a66c6a577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacleType1: {fileID: 0}
-  obstacleType2: {fileID: 0}
-  obstacleType3: {fileID: 0}
-  columnPoolSize: 7
-  spawnRate: 4
-  columnMin: -1
-  columnMax: 3.5
+  obstaclePrefabs:
+  - {fileID: 1312252481204898, guid: 590a9adfbb933724292fe66da0035e60, type: 2}
+  - {fileID: 1942346141146728, guid: b51ae36ec3e681742bbaf3b3eabe14f8, type: 2}
+  spawnOrder: 0 1 0 1 0 1
+  exitBorder: -15
+  entryBorder: 15
+  spawnHeight: -2
+  obstacleSpacing: 10
 --- !u!114 &1244831760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Santa: {fileID: 0}
   gameOver: 0
-  scrollSpeed: -1.5
+  ScrollSpeed: -1.5
 --- !u!4 &1244831761
 Transform:
   m_ObjectHideFlags: 0
