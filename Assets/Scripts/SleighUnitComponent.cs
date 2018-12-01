@@ -8,6 +8,8 @@ public class SleighUnitComponent : MonoBehaviour
     public Rigidbody2D Rigidbody { get; private set; }
     public Collider2D Collider { get; private set; }
 
+    public Transform LineAnchor;
+
     public virtual void Initialize()
     {
         this.Transform = this.GetComponent<Transform>();

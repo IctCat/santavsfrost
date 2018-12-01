@@ -94,13 +94,30 @@ public class SantaComponent : MonoBehaviour
             this.Sleigh.AddVerticalForce(y * Time.fixedDeltaTime);
         }
 
-        // Reindeer horizontal movement
         for (int i = 0; i < this.Reindeers.Count; i++)
         {
+            // Reindeer horizontal movement
             Vector2 position = this.Reindeers[i].Transform.localPosition;
-            Vector2 target = this.ReindeerTargetPosition(i);
+            Vector2 target = this.ReindeerTargetPosition(i, false);
             this.Reindeers[i].Transform.localPosition = Vector2.MoveTowards(position, target, Time.fixedDeltaTime);
+
+            // Update line renderers.
+            Vector2 endPoint;
+
+            if (i == 0)
+            {
+                endPoint = this.Sleigh.LineAnchor.position;
+            }
+            else
+            {
+                endPoint = this.Reindeers[i - 1].LineAnchor.position;
+            }
+
+            endPoint -= (Vector2)this.Reindeers[i].Transform.position;
+            
+            this.Reindeers[i].LineRenderer.SetPosition(1, endPoint);
         }
+
 
         // Reset input
         this.PlayerInput.ResetInput();
@@ -126,7 +143,7 @@ public class SantaComponent : MonoBehaviour
         this.Reindeers.Add(reindeer);
 
         // Set initial position.
-        reindeer.Transform.localPosition = this.ReindeerTargetPosition(this.Reindeers.Count - 1);
+        reindeer.Transform.localPosition = this.ReindeerTargetPosition(this.Reindeers.Count - 1, true);
     }
 
     public void RemoveReindeer(ReindeerComponent reindeer)
@@ -171,13 +188,14 @@ public class SantaComponent : MonoBehaviour
         reindeer.Rigidbody.AddTorque(2, ForceMode2D.Impulse);
         reindeer.Transform.SetParent(null);
         reindeer.gameObject.layer = GameControl.DebrisLayer;
+        reindeer.LineRenderer.enabled = false;
         this.Reindeers.RemoveAt(index);
     }
 
-    private Vector2 ReindeerTargetPosition(int index)
+    private Vector2 ReindeerTargetPosition(int index, bool initializeY)
     {
         float x = this.Sleigh.Transform.localPosition.x + index + 2;
-        float y = this.Reindeers[index].Transform.localPosition.y;
+        float y = initializeY ? this.Sleigh.Transform.localPosition.y : this.Reindeers[index].Transform.localPosition.y;
         return new Vector2(x, y);
     }
 
