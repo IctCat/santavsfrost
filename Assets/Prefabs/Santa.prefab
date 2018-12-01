@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 114430814281536270}
   m_Layer: 0
   m_Name: Santa
-  m_TagString: Untagged
+  m_TagString: SantaPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,6 +401,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 36673d6499b10d545875eed97a00d58f, type: 3}
   - {fileID: 21300000, guid: a25465003bfbace44a7e86577602cd63, type: 3}
   - {fileID: 21300000, guid: cc3f48e2605b3c84aaa9474797373d4c, type: 3}
+  SackRenderer: {fileID: 212238216818280256}
   SantaRigidbody: {fileID: 50543380172465724}
   InitialReindeerCount: 7
   HorizontalMovementRange: 3
