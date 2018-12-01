@@ -9,11 +9,21 @@ public class SleighComponent : SleighUnitComponent
 
     public Transform GiftDropAnchor;
 
+    public void OnTriggerEnter2D(Collider2D collider)
+    {
+        this.Collision(collider.gameObject);
+    }
+
     public void OnCollisionEnter2D(Collision2D collision)
+    {
+        this.Collision(collision.gameObject);
+    }
+
+    private void Collision(GameObject go)
     {
         if (!GameControl.instance.gameOver)
         {
-            ObstacleComponent obstacle = collision.gameObject.GetComponent<ObstacleComponent>();
+            ObstacleComponent obstacle = go.GetComponent<ObstacleComponent>();
 
             if (obstacle != null)
             {

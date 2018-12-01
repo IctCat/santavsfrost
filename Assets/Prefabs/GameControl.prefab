@@ -273,10 +273,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1ScoreText: {fileID: 114936594123518076}
   Player2ScoreText: {fileID: 114095971429194318}
-  SantaPrefab: {fileID: 1344622475544702, guid: 1007318d97c9b774981d7ef070ed2c6f,
-    type: 2}
-  FrostPrefab: {fileID: 1369866162087974, guid: e50f09f4b95c86c42b116ba7b93542fb,
-    type: 2}
   gameOver: 0
   ScrollSpeed: -10
 --- !u!114 &114900534212711830
