@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4334809677530068}
   - component: {fileID: 114680899246836434}
+  - component: {fileID: 114037180198074100}
   m_Layer: 0
   m_Name: ObstacleSpawner
   m_TagString: Untagged
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114037180198074100
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081052956144252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1678f9599639b4182d275445a625f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Blizzard: 0
+  ManualLaunch: 0
+  ThrowForce: 30
+  SantaPlayer: {fileID: 0}
+  BlizzardInterval: 0.9
+  BlizzardDuration: 4.6
 --- !u!114 &114680899246836434
 MonoBehaviour:
   m_ObjectHideFlags: 1

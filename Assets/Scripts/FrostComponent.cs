@@ -28,12 +28,12 @@ public class FrostComponent : MonoBehaviour
     {
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
-            
+            FrostSkills.Instance.LaunchSpikes();
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.B))
         {
-            
+            FrostSkills.Instance.Blizzard = true;
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.X))

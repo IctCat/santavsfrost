@@ -26,6 +26,7 @@ public class FrostSpike : MonoBehaviour {
         _rb.simulated = true;
         _rb.gravityScale = 0;
         _rb.velocity.Set(0, LaunchVelocity);
+        _rb.isKinematic = false;
         _launched = true;
     }
 }
