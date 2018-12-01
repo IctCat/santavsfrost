@@ -47,7 +47,14 @@ public class SantaComponent : MonoBehaviour
 
     public void Start()
     {
-        this.PlayerInput = new PlayerInput(PlayerIndex.One, PlayerInput.KeyboardLayout.NumberRow);
+        if (GameControl.Player1Santa)
+        {
+            this.PlayerInput = new PlayerInput(PlayerIndex.One, PlayerInput.KeyboardLayout.NumberRow);
+        }
+        else
+        {
+            this.PlayerInput = new PlayerInput(PlayerIndex.Two, PlayerInput.KeyboardLayout.NumPad);
+        }
 
         this.InitialReindeerCount = Mathf.Clamp(this.InitialReindeerCount, 1, 4);
 
@@ -142,7 +149,6 @@ public class SantaComponent : MonoBehaviour
             
             this.Reindeers[i].LineRenderer.SetPosition(1, endPoint);
         }
-
 
         // Reset input
         this.PlayerInput.ResetInput();

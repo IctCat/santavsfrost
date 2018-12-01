@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using XInputDotNetPure;
 
 public class GameControl : MonoBehaviour 
 {
@@ -33,12 +34,15 @@ public class GameControl : MonoBehaviour
     [System.NonSerialized]
     public SantaComponent Santa;
 
+    [System.NonSerialized]
+    public FrostComponent Frost;
+
 	public bool gameOver = false;
 	public float ScrollSpeed = -1.5f;
 
 	void Awake()
 	{
-		if (GameControl.instance == null)
+        if (GameControl.instance == null)
         {
             GameControl.instance = this;
             Object.DontDestroyOnLoad(this.gameObject);
@@ -46,9 +50,8 @@ public class GameControl : MonoBehaviour
 		else if (GameControl.instance != this)
         {
             Object.Destroy(this.gameObject);
+            return;
         }
-
-        this.Santa = Object.FindObjectOfType<SantaComponent>();
 
         GameControl.GroundLayer = LayerMask.NameToLayer("Ground");
         GameControl.EnvironmentLayer = LayerMask.NameToLayer("Environment");
@@ -58,22 +61,32 @@ public class GameControl : MonoBehaviour
 
         GameControl.Player1Santa = true;
 
-        this.UpdateScoreTexts();
+        this.InitializeRound();
     }
 
 	public void Update()
 	{
 		if (this.gameOver && Input.GetMouseButtonDown(0)) 
 		{
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            this.gameOver = false;
             this.SwitchPlayers();
+            this.gameOver = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            this.InitializeRound();
         }
 	}
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Object.Destroy(collision.gameObject);
+    }
+
+    public void InitializeRound()
+    {
+        this.Santa = Object.FindObjectOfType<SantaComponent>();
+        this.Frost = Object.FindObjectOfType<FrostComponent>();
+        this.UpdateScoreTexts();
+
+        Debug.Log(this.Santa);
     }
 
     public void AddSantaScore()
