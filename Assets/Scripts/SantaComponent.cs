@@ -9,7 +9,7 @@ public class SantaComponent : MonoBehaviour
     private GameObject ReindeerPrefab;
 
     [SerializeField]
-    private int InitialReindeerCount;
+    private int InitialReindeerCount = 4;
 
     [System.NonSerialized]
     public PlayerInput PlayerInput;
@@ -17,27 +17,14 @@ public class SantaComponent : MonoBehaviour
     private Transform Transform;
     private Vector2 TargetPosition;
 
-    private int ActiveReindeerIndex;
-
     private SleighComponent Sleigh;
     private List<ReindeerComponent> Reindeers;
-
-    private ReindeerComponent ActiveReindeer
-    {
-        get
-        {
-            return this.Reindeers[this.ActiveReindeerIndex];
-        }
-    }
 
     public void Start()
     {
         this.PlayerInput = new PlayerInput();
 
-        if (this.InitialReindeerCount <= 0)
-        {
-            this.InitialReindeerCount = 1;
-        }
+        this.InitialReindeerCount = Mathf.Clamp(this.InitialReindeerCount, 1, 4);
 
         this.Transform = this.GetComponent<Transform>();
         this.TargetPosition = Vector2.zero;
@@ -49,7 +36,7 @@ public class SantaComponent : MonoBehaviour
         for (int i = 0; i < this.InitialReindeerCount; i++)
         {
             GameObject go = Object.Instantiate<GameObject>(this.ReindeerPrefab, this.Transform, false);
-            go.transform.localPosition = this.Sleigh.transform.localPosition + new Vector3(i + 1, 0);
+            go.transform.localPosition = this.Sleigh.transform.localPosition + new Vector3(i + 2, 0);
             ReindeerComponent reindeer = go.GetComponent<ReindeerComponent>();
             reindeer.Initialize();
 
@@ -64,8 +51,6 @@ public class SantaComponent : MonoBehaviour
 
         // Connect the first reindeer to the sleigh.
         this.Reindeers[0].SpringJoint.connectedBody = this.Sleigh.Rigidbody;
-
-        this.ActiveReindeerIndex = Reindeers.Count - 1;
     }
 
     public void Update()
@@ -77,12 +62,22 @@ public class SantaComponent : MonoBehaviour
     {
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
-            this.ActiveReindeerJump();
+            this.ActiveReindeerJump(0);
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.B))
         {
-            this.CycleActiveReindeer();
+            this.ActiveReindeerJump(1);
+        }
+
+        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.X))
+        {
+            this.ActiveReindeerJump(2);
+        }
+
+        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.Y))
+        {
+            this.ActiveReindeerJump(3);
         }
 
         // Horizontal movement
@@ -102,18 +97,11 @@ public class SantaComponent : MonoBehaviour
         this.PlayerInput.ResetInput();
     }
 
-    private void ActiveReindeerJump()
+    private void ActiveReindeerJump(int index)
     {
-        this.ActiveReindeer.Jump();
-    }
-
-    private void CycleActiveReindeer()
-    {
-        this.ActiveReindeerIndex++;
-
-        if (this.ActiveReindeerIndex == this.Reindeers.Count)
+        if ((index >= 0) && (index < this.Reindeers.Count))
         {
-            this.ActiveReindeerIndex = 0;
+            this.Reindeers[index].Jump();
         }
     }
 }

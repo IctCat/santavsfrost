@@ -8,6 +8,8 @@ public class PlayerInput
     public enum Button {
         A,
         B,
+        X,
+        Y,
         Count
     }
 
@@ -44,6 +46,13 @@ public class PlayerInput
 
     private InputButtonState[] InputButtonStates;
 
+    private const string InputHorizontal = "Horizontal";
+    private const string InputVertical = "Vertical";
+    private const string InputReindeerA = "Reindeer A";
+    private const string InputReindeerB = "Reindeer B";
+    private const string InputReindeerX = "Reindeer X";
+    private const string InputReindeerY = "Reindeer Y";
+
     public PlayerInput()
     {
         this.Initialize();
@@ -72,8 +81,18 @@ public class PlayerInput
 
             switch (this.InputButtonStates[i].Button)
             {
-                case Button.A: pressed = state.Buttons.A == ButtonState.Pressed; break;
-                case Button.B: pressed = state.Buttons.B == ButtonState.Pressed; break;
+                case Button.A:
+                    pressed = (state.Buttons.A == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerA);
+                    break;
+                case Button.B:
+                    pressed = (state.Buttons.B == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerB);
+                    break;
+                case Button.X:
+                    pressed = (state.Buttons.X == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerX);
+                    break;
+                case Button.Y:
+                    pressed = (state.Buttons.Y == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputReindeerY);
+                    break;
             }
 
             if (pressed)
@@ -120,23 +139,31 @@ public class PlayerInput
 
     public float GetHorizontalAxis(Stick stick)
     {
+        float value = Input.GetAxis(PlayerInput.InputHorizontal);
+
         GamePadState state = GamePad.GetState(this.PlayerIndex);
+
         switch (stick)
         {
-            case Stick.Left: return state.ThumbSticks.Left.X;
-            case Stick.Right: return state.ThumbSticks.Right.X;
+            case Stick.Left: value += state.ThumbSticks.Left.X; break;
+            case Stick.Right: value += state.ThumbSticks.Right.X; break;
         }
-        return 0;
+
+        return Mathf.Clamp(value, -1, 1);
     }
 
     public float GetVerticalAxis(Stick stick)
     {
+        float value = Input.GetAxis(PlayerInput.InputVertical);
+
         GamePadState state = GamePad.GetState(this.PlayerIndex);
+
         switch (stick)
         {
-            case Stick.Left: return state.ThumbSticks.Left.Y;
-            case Stick.Right: return state.ThumbSticks.Right.Y;
+            case Stick.Left: value += state.ThumbSticks.Left.Y; break;
+            case Stick.Right: value += state.ThumbSticks.Right.Y; break;
         }
-        return 0;
+
+        return Mathf.Clamp(value, -1, 1);
     }
 }
