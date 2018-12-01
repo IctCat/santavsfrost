@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour 
 {
     [System.NonSerialized]
+    public static int GroundLayer;
+
+    [System.NonSerialized]
     public static int EnvironmentLayer;
 
     [System.NonSerialized]
@@ -47,6 +50,7 @@ public class GameControl : MonoBehaviour
 
         this.Santa = Object.FindObjectOfType<SantaComponent>();
 
+        GameControl.GroundLayer = LayerMask.NameToLayer("Ground");
         GameControl.EnvironmentLayer = LayerMask.NameToLayer("Environment");
         GameControl.SleighLayer = LayerMask.NameToLayer("Sleigh");
         GameControl.DebrisLayer = LayerMask.NameToLayer("Debris");
