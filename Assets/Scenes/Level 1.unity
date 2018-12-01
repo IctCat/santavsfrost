@@ -356,8 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4850255a45ab5e9448b29fef77f1a2f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 2129455699}
-  gameOvertext: {fileID: 433713201}
+  Santa: {fileID: 0}
   gameOver: 0
   scrollSpeed: -1.5
 --- !u!4 &1244831761
@@ -419,6 +418,10 @@ Prefab:
     - target: {fileID: 4889775930482406, guid: cc934f51fc632524786844dca51b4475, type: 2}
       propertyPath: m_LocalPosition.y
       value: -11.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 1404911830250038, guid: cc934f51fc632524786844dca51b4475, type: 2}
+      propertyPath: m_Name
+      value: sky
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc934f51fc632524786844dca51b4475, type: 2}

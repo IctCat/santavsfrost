@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4348858993851744}
   - component: {fileID: 212164262403237920}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,8 @@ GameObject:
   - component: {fileID: 50197354818183674}
   - component: {fileID: 231210737192939468}
   - component: {fileID: 114301337511503914}
-  m_Layer: 0
+  - component: {fileID: 60254746427321550}
+  m_Layer: 9
   m_Name: Reindeer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,12 +87,45 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0.5
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 5
+--- !u!60 &60254746427321550
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1861753917986566}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.114136815, y: 0.01813402}
+      - {x: -0.31527567, y: -0.028604537}
+      - {x: -0.31154943, y: -0.36177814}
+      - {x: 0.20631671, y: -0.3573933}
+      - {x: 0.22346252, y: -0.032181315}
+      - {x: 0.3284732, y: 0.03287965}
+      - {x: 0.29780602, y: 0.30791175}
+      - {x: 0.19586384, y: 0.3713005}
+      - {x: 0.07437199, y: 0.29914954}
 --- !u!114 &114301337511503914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6ffae22c2f3f440aa880a8ddbe7fad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 180
+  JumpForce: 300
   JumpCooldown: 4
 --- !u!212 &212164262403237920
 SpriteRenderer:
@@ -167,6 +201,6 @@ SpringJoint2D:
   m_Anchor: {x: 0, y: 0}
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 0
-  m_Distance: 1
+  m_Distance: 1.05
   m_DampingRatio: 1
   m_Frequency: 1

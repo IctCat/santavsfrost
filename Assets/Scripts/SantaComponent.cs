@@ -41,22 +41,8 @@ public class SantaComponent : MonoBehaviour
 
         for (int i = 0; i < this.InitialReindeerCount; i++)
         {
-            GameObject go = Object.Instantiate<GameObject>(this.ReindeerPrefab, this.Transform, false);
-            go.transform.localPosition = this.Sleigh.transform.localPosition + new Vector3(i + 2, 0);
-            ReindeerComponent reindeer = go.GetComponent<ReindeerComponent>();
-            reindeer.Initialize();
-
-            // Connect this reindeer to the previous reindeer.
-            if (i > 0)
-            {
-                reindeer.SpringJoint.connectedBody = this.Reindeers[i - 1].Rigidbody;
-            }
-
-            this.Reindeers.Add(reindeer);
+            this.AddReindeer();
         }
-
-        // Connect the first reindeer to the sleigh.
-        this.Reindeers[0].SpringJoint.connectedBody = this.Sleigh.Rigidbody;
     }
 
     public void Update()
@@ -87,13 +73,13 @@ public class SantaComponent : MonoBehaviour
         }
 
         // Horizontal movement
-        float acceleration = 5f;
+        float acceleration = 2f;
         float x = this.PlayerInput.GetHorizontalAxis(PlayerInput.Stick.Left);
 
         Vector2 targetOffset = new Vector2(x, 0);
         this.TargetOffset = Vector2.MoveTowards(this.TargetOffset, targetOffset, acceleration * Time.fixedDeltaTime);
 
-        float maxSpeed = 1f;
+        float maxSpeed = 0.75f;
         float speed = Mathf.Min(maxSpeed, maxSpeed * Vector2.Distance(this.AnchorPosition, this.TargetOffset));
 
         Vector2 offset = this.HorizontalMovementRange * this.TargetOffset;
@@ -108,8 +94,91 @@ public class SantaComponent : MonoBehaviour
             this.Sleigh.AddVerticalForce(y * Time.fixedDeltaTime);
         }
 
+        // Reindeer horizontal movement
+        for (int i = 0; i < this.Reindeers.Count; i++)
+        {
+            Vector2 position = this.Reindeers[i].Transform.localPosition;
+            Vector2 target = this.ReindeerTargetPosition(i);
+            this.Reindeers[i].Transform.localPosition = Vector2.MoveTowards(position, target, Time.fixedDeltaTime);
+        }
+
         // Reset input
         this.PlayerInput.ResetInput();
+    }
+
+    public void AddReindeer()
+    {
+        GameObject go = Object.Instantiate<GameObject>(this.ReindeerPrefab, this.Transform, false);
+        ReindeerComponent reindeer = go.GetComponent<ReindeerComponent>();
+        reindeer.Initialize();
+
+        // Connect this reindeer to the previous reindeer.
+        if (this.Reindeers.Count > 0)
+        {
+            reindeer.SpringJoint.connectedBody = this.Reindeers[this.Reindeers.Count - 1].Rigidbody;
+        }
+        else
+        {
+            // Connect the first reindeer to the sleigh.
+            reindeer.SpringJoint.connectedBody = this.Sleigh.Rigidbody;
+        }
+
+        this.Reindeers.Add(reindeer);
+
+        // Set initial position.
+        reindeer.Transform.localPosition = this.ReindeerTargetPosition(this.Reindeers.Count - 1);
+    }
+
+    public void RemoveReindeer(ReindeerComponent reindeer)
+    {
+        for (int i = 0; i < this.Reindeers.Count; i++)
+        {
+            if (this.Reindeers[i] == reindeer)
+            {
+                this.RemoveReindeer(i);
+                return;
+            }
+        }
+    }
+
+    public void RemoveReindeer(int index)
+    {
+        if ((index < 0) || (index >= this.Reindeers.Count))
+        {
+            return;
+        }
+
+        if (index < this.Reindeers.Count - 1)
+        {
+            if (index == 0)
+            {
+                // Connect the reindeer to the sleigh.
+                this.Reindeers[index + 1].SpringJoint.connectedBody = this.Sleigh.Rigidbody;
+            }
+            else
+            {
+                // Connect the reindeer to the previous reindeer.
+                this.Reindeers[index + 1].SpringJoint.connectedBody = this.Reindeers[index - 1].Rigidbody;
+            }
+        }
+
+        // Release the reindeer from the chain.
+        ReindeerComponent reindeer = this.Reindeers[index];
+        reindeer.Rigidbody.freezeRotation = false;
+        reindeer.Rigidbody.constraints = RigidbodyConstraints2D.None;
+        reindeer.SpringJoint.enabled = false;
+        reindeer.Rigidbody.gravityScale = 1;
+        reindeer.Rigidbody.AddTorque(2, ForceMode2D.Impulse);
+        reindeer.Transform.SetParent(null);
+        reindeer.gameObject.layer = GameControl.DebrisLayer;
+        this.Reindeers.RemoveAt(index);
+    }
+
+    private Vector2 ReindeerTargetPosition(int index)
+    {
+        float x = this.Sleigh.Transform.localPosition.x + index + 2;
+        float y = this.Reindeers[index].Transform.localPosition.y;
+        return new Vector2(x, y);
     }
 
     private void ActiveReindeerJump(int index)
