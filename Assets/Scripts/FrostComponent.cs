@@ -7,6 +7,8 @@ public class FrostComponent : MonoBehaviour
 {
     private PlayerInput PlayerInput;
 
+    public FrostSkills Skills { get; private set; }
+
     public void Start()
     {
         if (GameControl.Player1Santa)
@@ -17,6 +19,10 @@ public class FrostComponent : MonoBehaviour
         {
             this.PlayerInput = new PlayerInput(PlayerIndex.One, PlayerInput.KeyboardLayout.NumberRow);
         }
+
+        GameControl.instance.Frost = this;
+
+        this.Skills = this.GetComponent<FrostSkills>();
     }
 
     public void Update()
@@ -28,12 +34,12 @@ public class FrostComponent : MonoBehaviour
     {
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
-            
+            this.Skills.LaunchSpikes();
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.B))
         {
-            
+            this.Skills.Blizzard = true;
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.X))

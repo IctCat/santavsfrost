@@ -40,7 +40,7 @@ public class GameControl : MonoBehaviour
 	public bool gameOver = false;
 	public float ScrollSpeed = -1.5f;
 
-	void Awake()
+	public void Awake()
 	{
         if (GameControl.instance == null)
         {
@@ -61,32 +61,23 @@ public class GameControl : MonoBehaviour
 
         GameControl.Player1Santa = true;
 
-        this.InitializeRound();
+        this.UpdateScoreTexts();
     }
 
 	public void Update()
 	{
 		if (this.gameOver && Input.GetMouseButtonDown(0)) 
 		{
-            this.SwitchPlayers();
             this.gameOver = false;
+            this.SwitchPlayers();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            this.InitializeRound();
+            this.UpdateScoreTexts();
         }
 	}
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Object.Destroy(collision.gameObject);
-    }
-
-    public void InitializeRound()
-    {
-        this.Santa = Object.FindObjectOfType<SantaComponent>();
-        this.Frost = Object.FindObjectOfType<FrostComponent>();
-        this.UpdateScoreTexts();
-
-        Debug.Log(this.Santa);
     }
 
     public void AddSantaScore()

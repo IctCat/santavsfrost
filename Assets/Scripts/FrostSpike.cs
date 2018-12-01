@@ -10,7 +10,7 @@ public class FrostSpike : MonoBehaviour {
 	void Start () {
         _rb = GetComponent<Rigidbody2D>();
         _rb.simulated = true;
-        FrostSkills.Instance.SpikeAvailable(this);
+        GameControl.instance.Frost.Skills.SpikeAvailable(this);
 	}
 	
 	// Update is called once per frame
@@ -26,6 +26,16 @@ public class FrostSpike : MonoBehaviour {
         _rb.simulated = true;
         _rb.gravityScale = 0;
         _rb.velocity.Set(0, LaunchVelocity);
+        _rb.isKinematic = false;
         _launched = true;
+    }
+
+    public void Reset()
+    {
+        _rb.simulated = false;
+        _rb.gravityScale = 0;
+        _rb.velocity.Set(0, 0);
+        _rb.isKinematic = true;
+        _launched = false;
     }
 }

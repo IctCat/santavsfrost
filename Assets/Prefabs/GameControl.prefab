@@ -38,9 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4207787492597496}
   - component: {fileID: 114276679907972504}
-  - component: {fileID: 114476085795933928}
   - component: {fileID: 61868119787218434}
-  - component: {fileID: 114749951314266416}
   m_Layer: 8
   m_Name: GameControl
   m_TagString: Untagged
@@ -276,43 +274,7 @@ MonoBehaviour:
   Player1ScoreText: {fileID: 114936594123518076}
   Player2ScoreText: {fileID: 114095971429194318}
   gameOver: 0
-  ScrollSpeed: -1.5
---- !u!114 &114476085795933928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401823129710428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb9db8485ccb24efebb0303a66c6a577, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstaclePrefabs:
-  - {fileID: 1312252481204898, guid: 590a9adfbb933724292fe66da0035e60, type: 2}
-  - {fileID: 1942346141146728, guid: b51ae36ec3e681742bbaf3b3eabe14f8, type: 2}
-  spawnOrder: 0 1 0 1 0 1
-  exitBorder: -15
-  entryBorder: 15
-  spawnHeight: 2
-  obstacleSpacing: 10
---- !u!114 &114749951314266416
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1401823129710428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c1678f9599639b4182d275445a625f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Blizzard: 0
-  ManualLaunch: 0
-  ThrowForce: 30
-  SantaPlayer: {fileID: 0}
-  BlizzardInterval: 0.9
-  BlizzardDuration: 4.6
+  ScrollSpeed: -10
 --- !u!114 &114900534212711830
 MonoBehaviour:
   m_ObjectHideFlags: 1

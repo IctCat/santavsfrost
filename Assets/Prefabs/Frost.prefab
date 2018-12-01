@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512521770609232}
   - component: {fileID: 114069946966757266}
+  - component: {fileID: 114513374613705834}
   m_Layer: 0
   m_Name: Frost
   m_TagString: Untagged
@@ -51,3 +52,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df997dab757b9e409de905cdc4022fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Skills: {fileID: 0}
+--- !u!114 &114513374613705834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1369866162087974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1678f9599639b4182d275445a625f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Blizzard: 0
+  ManualLaunch: 0
+  ThrowForce: 30
+  BlizzardInterval: 0.9
+  BlizzardDuration: 4.6
