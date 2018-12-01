@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour 
 {
     [System.NonSerialized]
+    public static int GroundLayer;
+
+    [System.NonSerialized]
     public static int EnvironmentLayer;
 
     [System.NonSerialized]
@@ -14,8 +17,20 @@ public class GameControl : MonoBehaviour
     [System.NonSerialized]
     public static int DebrisLayer;
 
+    [System.NonSerialized]
+    public static int IgnoreObstaclesLayer;
+
+    public static int Player1Score;
+    public static int Player2Score;
+
+    public static bool Player1Santa;
+
+    public Text Player1ScoreText;
+    public Text Player2ScoreText;
+
     public static GameControl instance;
 
+    [System.NonSerialized]
     public SantaComponent Santa;
 
 	public bool gameOver = false;
@@ -26,6 +41,7 @@ public class GameControl : MonoBehaviour
 		if (GameControl.instance == null)
         {
             GameControl.instance = this;
+            Object.DontDestroyOnLoad(this.gameObject);
         }
 		else if (GameControl.instance != this)
         {
@@ -34,9 +50,15 @@ public class GameControl : MonoBehaviour
 
         this.Santa = Object.FindObjectOfType<SantaComponent>();
 
+        GameControl.GroundLayer = LayerMask.NameToLayer("Ground");
         GameControl.EnvironmentLayer = LayerMask.NameToLayer("Environment");
         GameControl.SleighLayer = LayerMask.NameToLayer("Sleigh");
         GameControl.DebrisLayer = LayerMask.NameToLayer("Debris");
+        GameControl.IgnoreObstaclesLayer = LayerMask.NameToLayer("Ignore Obstacles");
+
+        GameControl.Player1Santa = true;
+
+        this.UpdateScoreTexts();
     }
 
 	public void Update()
@@ -44,12 +66,56 @@ public class GameControl : MonoBehaviour
 		if (this.gameOver && Input.GetMouseButtonDown(0)) 
 		{
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-		}
+            this.gameOver = false;
+            this.SwitchPlayers();
+        }
 	}
 
-	public void SantaDied()
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        Object.Destroy(collision.gameObject);
+    }
+
+    public void AddSantaScore()
+    {
+        if (GameControl.Player1Santa)
+        {
+            GameControl.Player1Score++;
+        }
+        else
+        {
+            GameControl.Player2Score++;
+        }
+
+        this.UpdateScoreTexts();
+    }
+
+    public void SantaDied()
 	{
 		//Set the game to be over.
 		this.gameOver = true;
 	}
+
+    public void SwitchPlayers()
+    {
+        GameControl.Player1Santa = !GameControl.Player1Santa;
+        this.UpdateScoreTexts();
+    }
+
+    public void UpdateScoreTexts()
+    {
+        if (GameControl.Player1Santa)
+        {
+            this.Player1ScoreText.color = Color.red;
+            this.Player2ScoreText.color = Color.blue;
+        }
+        else
+        {
+            this.Player1ScoreText.color = Color.blue;
+            this.Player2ScoreText.color = Color.red;
+        }
+
+        this.Player1ScoreText.text = "Player 1: " + GameControl.Player1Score;
+        this.Player2ScoreText.text = "Player 2: " + GameControl.Player2Score;
+    }
 }
