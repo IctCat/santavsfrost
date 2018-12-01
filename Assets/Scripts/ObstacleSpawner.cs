@@ -10,24 +10,28 @@ public class ObstacleSpawner : MonoBehaviour
     public float exitBorder = -15;                                  //X coordinate indicating end of camera view.
     public float entryBorder = 15;                                  //X coordinate indicating start of camera view.
     public float spawnHeight = -2;                                  //Y coordinate of spawned obstacles.
-    public float obstacleSpacing = 10;
+    public float obstacleSpacing = 3;                              // Minimum space between objects
+
+    public int rngMax = 6;                                          // Rng generator upper bound
 
     private int currentObstacle = 0;                                //Index of the first active rendered obstacle.
 
     private Vector2 spawnPos;                                   	//First spawn point
+    Vector2 modifiedSpawnPos;
 
     private List<int> spawnQueue = new List<int>();
     private GameObject[] activeObstacles;                               //Actual instances of obstacles.
-    private int activeObstaclesSize;                                    
+    private int activeObstaclesSize;
+    private float distance;                                           // Distance from first obstacle to the last obstacle
 
     void Start()
 	{
-
         spawnQueue = new List<int>(Array.ConvertAll(spawnOrder.Split(' '), int.Parse));
         activeObstaclesSize = spawnQueue.Count;
         //Debug.Log("Koko on: " + activeObstaclesSize.ToString());
         activeObstacles = new GameObject[activeObstaclesSize];
         spawnPos = new Vector2(entryBorder, spawnHeight);
+        modifiedSpawnPos = spawnPos;
         /**
          * Debugging string conversion
          * 
@@ -43,18 +47,24 @@ public class ObstacleSpawner : MonoBehaviour
         //Loop through the collection... 
         for (int i = 0; i < activeObstaclesSize; i++)
         {
-            spawnPos.x += obstacleSpacing;
-            Debug.Log("New spawn pos: " + spawnPos.x);
+            int randomOffSet = UnityEngine.Random.Range(0, rngMax);
+            modifiedSpawnPos.x = spawnPos.x + randomOffSet;
+            //Debug.Log("New spawn pos: " + spawnPos.x);
+            //Debug.Log("Modified new spawn pos: " + modifiedSpawnPos.x);
             //Debug.Log("i: " + i);
             //Debug.Log(spawnQueue[i]);
             //Debug.Log("Length: " +activeObstacles.Length + "Size: " + activeObstaclesSize);
             int type = spawnQueue[i];
             //Debug.Log("Tyyppi: " + type);
-            GameObject newObstacle = (GameObject)Instantiate(obstaclePrefabs[type], spawnPos, Quaternion.identity);
-            activeObstacles[i] = newObstacle;
+            GameObject newObstacle = (GameObject)Instantiate(obstaclePrefabs[type], modifiedSpawnPos, Quaternion.identity);
 
+            spawnPos.x += obstacleSpacing;
+            activeObstacles[i] = newObstacle;
 		}
-	}
+        distance = spawnPos.x - entryBorder - obstacleSpacing;
+        spawnPos = new Vector2(entryBorder, spawnHeight);
+        //Debug.Log("distance: " + distance);
+    }
     
     //Moves obstacles when game is not over.
 	void Update()
@@ -64,10 +74,22 @@ public class ObstacleSpawner : MonoBehaviour
 		{	
 			if( activeObstacles[currentObstacle].transform.position.x <= exitBorder )
             {
-                spawnPos.x += obstacleSpacing;
-                Debug.Log("New position: " + spawnPos.x);
-                activeObstacles[currentObstacle].transform.position = spawnPos;
+                spawnPos.x = activeObstacles[currentObstacle].transform.position.x + distance + obstacleSpacing;
+                //Debug.Log("New position: " + spawnPos.x);
+
+                int randomOffSet = UnityEngine.Random.Range(0, rngMax);
+                modifiedSpawnPos.x = spawnPos.x + randomOffSet;
+
+                activeObstacles[currentObstacle].transform.position = modifiedSpawnPos;
+
+                //spawnPos.x += obstacleSpacing;
                 currentObstacle++;
+
+                if(currentObstacle == activeObstaclesSize)
+                {
+                    currentObstacle = 0;
+                   // spawnPos = new Vector2(entryBorder, spawnHeight); Unnecessary reset
+                }
             }
 		}
 	}

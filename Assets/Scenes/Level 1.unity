@@ -341,11 +341,12 @@ MonoBehaviour:
   obstaclePrefabs:
   - {fileID: 1312252481204898, guid: 590a9adfbb933724292fe66da0035e60, type: 2}
   - {fileID: 1942346141146728, guid: b51ae36ec3e681742bbaf3b3eabe14f8, type: 2}
-  spawnOrder: 0 1 0 1 0 1
+  spawnOrder: 0 1 0 1 0 1 1 1 1 1
   exitBorder: -15
   entryBorder: 15
-  spawnHeight: -2
-  obstacleSpacing: 10
+  spawnHeight: 3
+  obstacleSpacing: 7
+  rngMax: 3
 --- !u!114 &1244831760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +360,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Santa: {fileID: 0}
   gameOver: 0
-  ScrollSpeed: -1.5
+  ScrollSpeed: -10
 --- !u!4 &1244831761
 Transform:
   m_ObjectHideFlags: 0
