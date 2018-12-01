@@ -75,6 +75,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159921939127892}
   - component: {fileID: 212567929407665254}
+  - component: {fileID: 114828859906437026}
   m_Layer: 0
   m_Name: sky
   m_TagString: Untagged
@@ -378,6 +379,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5667368c5cc61475ba99a5a2a33609f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114828859906437026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404911830250038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c12aff466ae47d46926e5d0d448deb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollSpeed: {x: 0.1, y: 0}
 --- !u!114 &114980153062033232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -431,7 +444,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 908f35a923e6874429e63a9d54035b24, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -502,7 +515,7 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 089dd3c6d5fa2d84fa81e3e7385facd5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
