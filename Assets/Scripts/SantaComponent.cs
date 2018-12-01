@@ -15,6 +15,9 @@ public class SantaComponent : MonoBehaviour
     private Sprite[] SackSprites;
 
     [SerializeField]
+    private SpriteRenderer SackRenderer;
+
+    [SerializeField]
     private Rigidbody2D SantaRigidbody;
 
     [SerializeField]
@@ -39,6 +42,9 @@ public class SantaComponent : MonoBehaviour
     private SleighComponent Sleigh;
     private List<ReindeerComponent> Reindeers;
 
+    private int GiftCount;
+    private int MaximumGiftCount { get { return this.SackSprites.Length - 1;  } }
+
     public void Start()
     {
         this.PlayerInput = new PlayerInput(PlayerIndex.One, PlayerInput.KeyboardLayout.NumberRow);
@@ -57,6 +63,8 @@ public class SantaComponent : MonoBehaviour
         {
             this.AddReindeer();
         }
+
+        this.RestockGifts();
     }
 
     public void Update()
@@ -142,10 +150,26 @@ public class SantaComponent : MonoBehaviour
 
     public void DropGift()
     {
-        GameObject go = Object.Instantiate<GameObject>(this.GiftPrefab, null, false);
-        go.transform.position = this.Sleigh.GiftDropAnchor.position;
-        Rigidbody2D rigidbody = go.GetComponent<Rigidbody2D>();
-        rigidbody.AddForce(Quaternion.AngleAxis(-15, Vector3.forward) * Vector3.up * 2f, ForceMode2D.Impulse);
+        if (this.GiftCount > 0)
+        {
+            GameObject go = Object.Instantiate<GameObject>(this.GiftPrefab, null, false);
+            go.transform.position = this.Sleigh.GiftDropAnchor.position;
+            GiftComponent gift = go.GetComponent<GiftComponent>();
+            gift.Rigidbody.AddForce(Quaternion.AngleAxis(-15, Vector3.forward) * Vector3.up * 2f, ForceMode2D.Impulse);
+            gift.Rigidbody.AddTorque(0.1f, ForceMode2D.Impulse);
+            // Gift color.
+            gift.BoxRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
+            gift.WrappingRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
+
+            this.GiftCount--;
+            this.SackRenderer.sprite = this.SackSprites[this.MaximumGiftCount - this.GiftCount];
+        }
+    }
+
+    public void RestockGifts()
+    {
+        this.GiftCount = this.MaximumGiftCount;
+        this.SackRenderer.sprite = this.SackSprites[this.MaximumGiftCount - this.GiftCount];
     }
 
     public void AddReindeer()
@@ -247,7 +271,7 @@ public class SantaComponent : MonoBehaviour
 
     private Vector2 ReindeerTargetPosition(int index, bool initializeY)
     {
-        float x = this.Sleigh.Transform.localPosition.x + (index * 1.25f) + 2;
+        float x = this.Sleigh.Transform.localPosition.x + (index * 2.0f) + 3;
         float y = initializeY ? this.Sleigh.Transform.localPosition.y : this.Reindeers[index].Transform.localPosition.y;
         return new Vector2(x, y);
     }
