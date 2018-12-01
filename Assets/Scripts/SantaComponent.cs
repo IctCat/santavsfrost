@@ -18,7 +18,9 @@ public class SantaComponent : MonoBehaviour
     public PlayerInput PlayerInput;
 
     private Transform Transform;
-    private Vector2 TargetPosition;
+
+    private Vector2 AnchorPosition;
+    private Vector2 TargetOffset;
 
     private SleighComponent Sleigh;
     private List<ReindeerComponent> Reindeers;
@@ -30,7 +32,8 @@ public class SantaComponent : MonoBehaviour
         this.InitialReindeerCount = Mathf.Clamp(this.InitialReindeerCount, 1, 4);
 
         this.Transform = this.GetComponent<Transform>();
-        this.TargetPosition = Vector2.zero;
+        this.AnchorPosition = this.Transform.position;
+        this.TargetOffset = Vector2.zero;
         this.Sleigh = this.GetComponentInChildren<SleighComponent>();
         this.Sleigh.Initialize();
 
@@ -87,15 +90,15 @@ public class SantaComponent : MonoBehaviour
         float acceleration = 5f;
         float x = this.PlayerInput.GetHorizontalAxis(PlayerInput.Stick.Left);
 
-        Vector2 targetTarget = new Vector2(x, 0);
-        this.TargetPosition = Vector2.MoveTowards(this.TargetPosition, targetTarget, acceleration * Time.fixedDeltaTime);
+        Vector2 targetOffset = new Vector2(x, 0);
+        this.TargetOffset = Vector2.MoveTowards(this.TargetOffset, targetOffset, acceleration * Time.fixedDeltaTime);
 
-        float maxSpeed = 0.5f;
-        float speed = Mathf.Min(maxSpeed, maxSpeed * Vector2.Distance(this.Transform.position, this.TargetPosition));
+        float maxSpeed = 1f;
+        float speed = Mathf.Min(maxSpeed, maxSpeed * Vector2.Distance(this.AnchorPosition, this.TargetOffset));
 
-        Vector2 target = this.HorizontalMovementRange * this.TargetPosition;
+        Vector2 offset = this.HorizontalMovementRange * this.TargetOffset;
 
-        this.Transform.position = Vector2.MoveTowards(this.Transform.position, target, speed * Time.fixedDeltaTime);
+        this.Transform.position = Vector2.MoveTowards(this.Transform.position, this.AnchorPosition + offset, speed * Time.fixedDeltaTime);
 
         // Vertical force (downwards)
         float y = this.PlayerInput.GetVerticalAxis(PlayerInput.Stick.Left);
