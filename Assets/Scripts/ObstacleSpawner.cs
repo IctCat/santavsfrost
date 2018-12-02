@@ -94,8 +94,9 @@ public class ObstacleSpawner : MonoBehaviour
                 }
                 activeObstacles[currentObstacle].transform.position = modifiedSpawnPos;
 
+                activeObstacles[currentObstacle].GetComponent<ObstacleComponent>().Reset();
                 //spawnPos.x += obstacleSpacing;
-                currentObstacle++;
+                currentObstacle++;               
 
                 if(currentObstacle == activeObstaclesSize)
                 {
