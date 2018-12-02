@@ -59,6 +59,7 @@ public class ObstacleSpawner : MonoBehaviour
             int type = spawnQueue[i];
             //Debug.Log("Tyyppi: " + type);
             GameObject newObstacle = (GameObject)Instantiate(obstaclePrefabs[type], modifiedSpawnPos, Quaternion.identity);
+            newObstacle.GetComponent<ObstacleComponent>().Reset();
 
             spawnPos.x += obstacleSpacing;
             activeObstacles[i] = newObstacle;

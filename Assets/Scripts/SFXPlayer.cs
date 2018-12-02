@@ -3,9 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SFXPlayer : MonoBehaviour {
-    public static SFXPlayer Instance;
+    static SFXPlayer _instance;
+    public static SFXPlayer Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Camera.main.GetComponent<SFXPlayer>();
+            }
+            return _instance;
+        }
+        set { _instance = value; }
+    }
     AudioSource _src;
-    private void Awake()
+    private void Start()
     {
         Instance = this;
         _src = GetComponent<AudioSource>();

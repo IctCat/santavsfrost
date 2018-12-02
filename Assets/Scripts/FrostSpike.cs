@@ -33,11 +33,14 @@ public class FrostSpike : ObstacleComponent
 
     public override void Reset()
     {
-        _rb.simulated = false;
-        _rb.gravityScale = 0;
-        _rb.velocity.Set(0, 0);
-        _rb.isKinematic = true;
-        _launched = false;
+        if (_rb != null)
+        {
+            _rb.simulated = false;
+            _rb.gravityScale = 0;
+            _rb.velocity.Set(0, 0);
+            _rb.isKinematic = true;
+            _launched = false;
+        }
 
         base.Reset();
     }
