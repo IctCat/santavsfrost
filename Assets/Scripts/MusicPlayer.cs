@@ -28,7 +28,7 @@ public class MusicPlayer : MonoBehaviour {
 
     IEnumerator FadeIn()
     {
-        while (_as.volume < 1.0f)
+        while (_as.volume < 0.8f)
         {
             _as.volume += FadeInRate;
             yield return new WaitForEndOfFrame();
