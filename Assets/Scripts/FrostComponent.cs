@@ -48,7 +48,7 @@ public class FrostComponent : MonoBehaviour
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.B))
         {
-            this.Skills.Blizzard = true;
+            this.Skills.StartBlizzard();
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.X))
