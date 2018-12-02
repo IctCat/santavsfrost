@@ -34,25 +34,26 @@ public class FrostComponent : MonoBehaviour
     {
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.Start)) 
         {
+            GameControl.instance.ReturnToMenu();
+            return;
+        }
+
+        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
+        {
             if (GameControl.instance.gameOver)
             {
                 GameControl.instance.RestartRound();
+                return;
             }
             else
             {
-                GameControl.instance.ReturnToMenu();
-                return;
+                this.Skills.LaunchSpikes();
             }
         }
 
         if (GameControl.instance.gameOver)
         {
             return;
-        }
-
-        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
-        {
-            this.Skills.LaunchSpikes();
         }
 
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.B))

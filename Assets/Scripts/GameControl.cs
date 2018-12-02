@@ -141,7 +141,7 @@ public class GameControl : MonoBehaviour
     {
         string text = "Player ";
         text += GameControl.Player1Santa ? "2" : "1";
-        text += "\nPress Start";
+        text += "\nPress A";
 
         this.RestartText.text = text;
     }
