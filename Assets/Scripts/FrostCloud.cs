@@ -11,6 +11,7 @@ public class FrostCloud : MonoBehaviour {
     Vector3 _offset = new Vector3();
     public Transform AngryCloud;
     public Transform NormalCloud;
+    public ParticleSystem blizzard; 
 
     public static bool Triggered = false;
     private void Start()
@@ -32,6 +33,7 @@ public class FrostCloud : MonoBehaviour {
         {
             AngryCloud.gameObject.SetActive(true);
             NormalCloud.gameObject.SetActive(false);
+            blizzard.Play();
         } else if (!MoodAngry && !NormalCloud.gameObject.activeSelf)
         {
             AngryCloud.gameObject.SetActive(false);
