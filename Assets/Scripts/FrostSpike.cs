@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrostSpike : MonoBehaviour {
+public class FrostSpike : ObstacleComponent
+{
     public float LaunchVelocity = 10;
     bool _launched;
     Rigidbody2D _rb;
@@ -30,12 +31,14 @@ public class FrostSpike : MonoBehaviour {
         _launched = true;
     }
 
-    public void Reset()
+    public override void Reset()
     {
         _rb.simulated = false;
         _rb.gravityScale = 0;
         _rb.velocity.Set(0, 0);
         _rb.isKinematic = true;
         _launched = false;
+
+        base.Reset();
     }
 }

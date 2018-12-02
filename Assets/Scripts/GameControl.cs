@@ -60,8 +60,8 @@ public class GameControl : MonoBehaviour
 
         this.ColorRed = Color.red;
         this.ColorBlue = Color.blue;
-        ColorUtility.TryParseHtmlString("D60202", out this.ColorRed);
-        ColorUtility.TryParseHtmlString("184281", out this.ColorBlue);
+        ColorUtility.TryParseHtmlString("#D60202", out this.ColorRed);
+        ColorUtility.TryParseHtmlString("#184281", out this.ColorBlue);
 
         GameControl.GroundLayer = LayerMask.NameToLayer("Ground");
         GameControl.EnvironmentLayer = LayerMask.NameToLayer("Environment");
