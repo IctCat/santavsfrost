@@ -142,12 +142,21 @@ public class SantaComponent : MonoBehaviour
 
         this.Transform.position = Vector2.MoveTowards(this.Transform.position, this.AnchorPosition + offset, speed * Time.fixedDeltaTime);
 
-        // Vertical force (downwards)
+        // Player controlled downwards force
         float y = this.PlayerInput.GetVerticalAxis(PlayerInput.Stick.Left);
 
         if (y < 0)
         {
             this.Sleigh.AddVerticalForce(y * Time.fixedDeltaTime);
+        }
+        
+        // Sky downwards force
+        if (this.Sleigh.transform.position.y > 12)
+        {
+            float maximum = 8;
+            float heightOffset = Mathf.Min(maximum, this.Sleigh.transform.position.y - 12);
+            float scale = Mathf.Pow(heightOffset / maximum, 2);
+            this.Sleigh.AddVerticalForce(-10 * scale * Time.fixedDeltaTime);
         }
 
         for (int i = 0; i < this.Reindeers.Count; i++)

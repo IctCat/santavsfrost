@@ -25,11 +25,14 @@ public class FrostSkills : MonoBehaviour {
         }
     }
 
-    public float ThrowForce = 30.0f;
+    float ThrowForce = 5.0f;
     public float BlizzardInterval = 0.9f;
     public float BlizzardDuration = 4.6f;
+    public float BlizzardCooldown = 10.0f;
     float _blizzardTimer = 0;
     float _blizzardDurationTimer = 0;
+    float _blizzardCooldownTimer = 0;
+    bool _blizzardAvailable = true;
 
     // Use this for initialization
     void Start () {
@@ -40,13 +43,22 @@ public class FrostSkills : MonoBehaviour {
     {
         foreach(FrostSpike spike in _spikes)
         {
-            if(spike != null) spike.Launch();
+            if ((spike != null) && (spike.transform.position.x < 12))
+            {
+                spike.Launch();
+            }
         }
-        _spikes.Clear();
+    }
+
+    void EnableBlizzard()
+    {
+        Debug.Log("Blizzard enabled!");
+        _blizzardAvailable = true;
     }
 
 	// Update is called once per frame
 	void Update () {
+
         if (Blizzard)
         {
             FrostCloud.MoodAngry = true;
@@ -62,7 +74,7 @@ public class FrostSkills : MonoBehaviour {
             {
                 foreach (Rigidbody2D rb in GameControl.instance.Santa.SleighBodies)
                 {
-                    rb.AddForce(Vector2.up * (UnityEngine.Random.value * 2 - 1) * ThrowForce, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * (UnityEngine.Random.value*0.5f+0.5f) * (UnityEngine.Random.value < 0.5f ? 1.0f : -1.0f) * ThrowForce, ForceMode2D.Impulse);
                 }
                 _blizzardTimer = BlizzardInterval;
             }
@@ -73,6 +85,7 @@ public class FrostSkills : MonoBehaviour {
                 Blizzard = false;
                 _soundPlayed = false;
                 FrostCloud.MoodAngry = false;
+                Invoke("EnableBlizzard", BlizzardCooldown);
             }
         }
         if(ManualLaunch)
@@ -81,4 +94,13 @@ public class FrostSkills : MonoBehaviour {
             ManualLaunch = false;
         }
 	}
+
+    public void StartBlizzard()
+    {
+        if (_blizzardAvailable)
+        {
+            Blizzard = true;
+            _blizzardAvailable = false;
+        }
+    }
 }
