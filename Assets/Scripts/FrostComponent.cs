@@ -32,12 +32,21 @@ public class FrostComponent : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if (GameControl.instance.gameOver)
+        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.Start)) 
         {
-            if (this.PlayerInput.GetButtonDown(PlayerInput.Button.Start))
+            if (GameControl.instance.gameOver)
             {
                 GameControl.instance.RestartRound();
             }
+            else
+            {
+                GameControl.instance.ReturnToMenu();
+                return;
+            }
+        }
+
+        if (GameControl.instance.gameOver)
+        {
             return;
         }
 

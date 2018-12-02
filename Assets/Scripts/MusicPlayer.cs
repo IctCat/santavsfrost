@@ -19,6 +19,12 @@ public class MusicPlayer : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
+        if (Object.FindObjectOfType<MusicPlayer>() != null)
+        {
+            Object.Destroy(this.gameObject);
+            return;
+        }
+
         DontDestroyOnLoad(gameObject);
         _as.clip = Song;
         _as.Play();
