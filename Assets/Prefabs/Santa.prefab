@@ -407,6 +407,7 @@ MonoBehaviour:
   HorizontalMovementRange: 3
   HorizontalAcceleration: 10
   MaximumHorizontalSpeed: 4
+  GiftCooldown: 1.2
   Hohos:
   - {fileID: 8300000, guid: daf5bb6b19628b34ea6d80168c77899c, type: 3}
   - {fileID: 8300000, guid: 1d4a23ccdedbf9b44b032d1d856753cf, type: 3}

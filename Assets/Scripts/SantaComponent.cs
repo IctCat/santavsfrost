@@ -32,6 +32,9 @@ public class SantaComponent : MonoBehaviour
     [SerializeField]
     private float MaximumHorizontalSpeed = 1f;
 
+    [SerializeField]
+    private float GiftCooldown = 1f;
+
     [System.NonSerialized]
     public Rigidbody2D[] SleighBodies;
 
@@ -48,6 +51,8 @@ public class SantaComponent : MonoBehaviour
     private int GiftCount;
     private int MaximumGiftCount { get { return this.SackSprites.Length - 1;  } }
 
+    private float GiftCooldownTimestamp;
+    
     public AudioClip[] Hohos;
     public AudioClip RefillSound;
     public AudioClip ReindeerHitSound;
@@ -73,6 +78,8 @@ public class SantaComponent : MonoBehaviour
         this.TargetOffset = Vector2.zero;
         this.Sleigh = this.GetComponentInChildren<SleighComponent>();
         this.Sleigh.Initialize();
+
+        this.GiftCooldownTimestamp = Time.time;
 
         this.Reindeers = new List<ReindeerComponent>(this.InitialReindeerCount);
 
@@ -176,6 +183,11 @@ public class SantaComponent : MonoBehaviour
 
     public void DropGift()
     {
+        if (this.GiftCooldownTimestamp > Time.time)
+        {
+            return;
+        }
+
         if (this.GiftCount > 0)
         {
             GameObject go = Object.Instantiate<GameObject>(this.GiftPrefab, null, false);
@@ -189,6 +201,8 @@ public class SantaComponent : MonoBehaviour
 
             this.GiftCount--;
             this.SackRenderer.sprite = this.SackSprites[this.MaximumGiftCount - this.GiftCount];
+
+            this.GiftCooldownTimestamp = Time.time + this.GiftCooldown;
 
             SFXPlayer.Instance.Play(Hohos[Random.Range(0, Hohos.Length)]);
         }
