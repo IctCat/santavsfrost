@@ -89,6 +89,14 @@ public class GameControl : MonoBehaviour
         Object.Destroy(collision.gameObject);
     }
 
+    public void ReturnToMenu()
+    {
+        GameControl.Player1Santa = true;
+        GameControl.Player1Score = 0;
+        GameControl.Player2Score = 0;
+        SceneManager.LoadScene(0);
+    }
+
     public void RestartRound()
     {
         if (this.gameOver)

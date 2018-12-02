@@ -105,6 +105,12 @@ public class SantaComponent : MonoBehaviour
             return;
         }
 
+        if (this.PlayerInput.GetButtonDown(PlayerInput.Button.Start))
+        {
+            GameControl.instance.ReturnToMenu();
+            return;
+        }
+
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
             this.ActiveReindeerJump(0);
