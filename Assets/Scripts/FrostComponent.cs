@@ -32,6 +32,15 @@ public class FrostComponent : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (GameControl.instance.gameOver)
+        {
+            if (this.PlayerInput.GetButtonDown(PlayerInput.Button.Start))
+            {
+                GameControl.instance.RestartRound();
+            }
+            return;
+        }
+
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
             this.Skills.LaunchSpikes();

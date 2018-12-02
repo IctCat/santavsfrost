@@ -93,6 +93,11 @@ public class SantaComponent : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (GameControl.instance.gameOver)
+        {
+            return;
+        }
+
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
             this.ActiveReindeerJump(0);
