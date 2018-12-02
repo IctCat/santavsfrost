@@ -33,7 +33,8 @@ public class FrostSpike : ObstacleComponent
     {
         if (_rb != null)
         {
-            _rb.velocity.Set(_rb.velocity.x, 0);
+            Debug.Log("Reset");
+            _rb.velocity = new Vector2(_rb.velocity.x, 0);
             _rb.isKinematic = true;
             _launched = false;
         }
