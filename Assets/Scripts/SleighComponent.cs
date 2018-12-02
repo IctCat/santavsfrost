@@ -34,7 +34,7 @@ public class SleighComponent : SleighUnitComponent
             this.TreeGifts[i].Transform.SetParent(null, true);
             Vector2 position = this.TreeGifts[i].transform.position;
             position = Vector2.Lerp(position, this.SackTransform.position, 3f * Time.fixedDeltaTime);
-            position = Vector2.MoveTowards(position, this.SackTransform.position, 3f * Time.fixedDeltaTime);
+            position = Vector2.MoveTowards(position, this.SackTransform.position, 10f * Time.fixedDeltaTime);
 
             if (Vector2.Distance(this.SackTransform.position, position) < 0.1f)
             {
