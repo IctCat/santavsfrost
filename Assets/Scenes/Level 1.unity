@@ -156,11 +156,6 @@ Prefab:
       propertyPath: m_Name
       value: FrostHandler
       objectReference: {fileID: 0}
-    - target: {fileID: 114513374613705834, guid: e50f09f4b95c86c42b116ba7b93542fb,
-        type: 2}
-      propertyPath: BlizzardSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 9ea17f9d29b01e445949ecad5b0bf21d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e50f09f4b95c86c42b116ba7b93542fb, type: 2}
   m_IsPrefabAsset: 0
@@ -171,11 +166,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
-        type: 2}
-      propertyPath: obstaclePrefabs.Array.size
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 4334809677530068, guid: 2dc4a62909220d742aa4e24a45f13e90, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.941727
@@ -208,34 +198,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
-        type: 2}
-      propertyPath: obstaclePrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 1694121286005834, guid: 243242c93d5eca442aa095b7b53816df,
-        type: 2}
-    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
-        type: 2}
-      propertyPath: spawnOrder
-      value: 0 1 2 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
-        type: 2}
-      propertyPath: exitBorder
-      value: -18
-      objectReference: {fileID: 0}
-    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
-        type: 2}
-      propertyPath: obstacleSpacing
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
-        type: 2}
-      propertyPath: rngMax
-      value: 4
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114037180198074100, guid: 2dc4a62909220d742aa4e24a45f13e90, type: 2}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dc4a62909220d742aa4e24a45f13e90, type: 2}
   m_IsPrefabAsset: 0
 --- !u!4 &438405908 stripped

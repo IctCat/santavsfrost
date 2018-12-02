@@ -57,8 +57,9 @@ MonoBehaviour:
   - {fileID: 1982189866528512, guid: 171c6dd20bda3304988dd515cd74e61a, type: 2}
   - {fileID: 1694121286005834, guid: 243242c93d5eca442aa095b7b53816df, type: 2}
   spawnOrder: 0 1 2 3
-  exitBorder: -15
+  exitBorder: -18
   entryBorder: 15
   spawnHeight: 2
-  obstacleSpacing: 10
-  rngMax: 6
+  obstacleSpacing: 12
+  startSpacing: 20
+  rngMax: 4
