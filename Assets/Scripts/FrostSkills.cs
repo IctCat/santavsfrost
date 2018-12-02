@@ -43,7 +43,10 @@ public class FrostSkills : MonoBehaviour {
     {
         foreach(FrostSpike spike in _spikes)
         {
-            if(spike != null) spike.Launch();
+            if ((spike != null) && (spike.transform.position.x < 12))
+            {
+                spike.Launch();
+            }
         }
     }
 
