@@ -195,9 +195,6 @@ public class SantaComponent : MonoBehaviour
             GiftComponent gift = go.GetComponent<GiftComponent>();
             gift.Rigidbody.AddForce(Quaternion.AngleAxis(-15, Vector3.forward) * Vector3.up * 2f, ForceMode2D.Impulse);
             gift.Rigidbody.AddTorque(0.1f, ForceMode2D.Impulse);
-            // Gift color.
-            gift.BoxRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
-            gift.WrappingRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
 
             this.GiftCount--;
             this.SackRenderer.sprite = this.SackSprites[this.MaximumGiftCount - this.GiftCount];

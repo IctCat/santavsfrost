@@ -14,10 +14,18 @@ public class GiftComponent : MonoBehaviour
     public void Start()
     {
         this.TargetTransform = null;
+
+        this.BoxRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
+        this.WrappingRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
     }
 
     public void FixedUpdate()
     {
+        if (this.Rigidbody == null)
+        {
+            return;
+        }
+
         if (this.TargetTransform != null)
         {
             if (Mathf.Abs(this.Transform.position.x - this.TargetTransform.position.x) > 0.01f)
