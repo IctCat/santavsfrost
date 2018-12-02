@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LineAnchor: {fileID: 4315725849563282}
-  DiveForce: 300
+  DiveForce: 1000
   GiftDropAnchor: {fileID: 4640137937112208}
 --- !u!212 &212030662876367374
 SpriteRenderer:
