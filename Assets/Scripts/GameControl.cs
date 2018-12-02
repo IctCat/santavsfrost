@@ -29,6 +29,8 @@ public class GameControl : MonoBehaviour
     public Text Player1ScoreText;
     public Text Player2ScoreText;
 
+    public Text RestartText;
+
     public static GameControl instance;
 
     [System.NonSerialized]
@@ -39,6 +41,9 @@ public class GameControl : MonoBehaviour
 
 	public bool gameOver = false;
 	public float ScrollSpeed = -1.5f;
+
+    private Color ColorRed;
+    private Color ColorBlue;
 
 	public void Awake()
 	{
@@ -53,6 +58,11 @@ public class GameControl : MonoBehaviour
             return;
         }
 
+        this.ColorRed = Color.red;
+        this.ColorBlue = Color.blue;
+        ColorUtility.TryParseHtmlString("#D60202", out this.ColorRed);
+        ColorUtility.TryParseHtmlString("#184281", out this.ColorBlue);
+
         GameControl.GroundLayer = LayerMask.NameToLayer("Ground");
         GameControl.EnvironmentLayer = LayerMask.NameToLayer("Environment");
         GameControl.SleighLayer = LayerMask.NameToLayer("Sleigh");
@@ -62,22 +72,34 @@ public class GameControl : MonoBehaviour
         GameControl.Player1Santa = true;
 
         this.UpdateScoreTexts();
+        this.UpdateStartText();
     }
 
-	public void Update()
-	{
-		if (this.gameOver && Input.GetMouseButtonDown(0)) 
-		{
-            this.gameOver = false;
-            this.SwitchPlayers();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            this.UpdateScoreTexts();
+    public void Update()
+    {
+        if (true || this.gameOver)
+        {
+            float scale = 1 + 0.1f * Mathf.Sin(4 * Time.time);
+            this.RestartText.transform.localScale = new Vector3(scale, scale, scale);
         }
-	}
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
         Object.Destroy(collision.gameObject);
+    }
+
+    public void RestartRound()
+    {
+        if (this.gameOver)
+        {
+            this.gameOver = false;
+            this.SwitchPlayers();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            this.UpdateScoreTexts();
+            this.RestartText.enabled = false;
+            this.UpdateStartText();
+        }
     }
 
     public void AddSantaScore()
@@ -98,7 +120,8 @@ public class GameControl : MonoBehaviour
 	{
 		//Set the game to be over.
 		this.gameOver = true;
-	}
+        this.RestartText.enabled = true;
+    }
 
     public void SwitchPlayers()
     {
@@ -106,17 +129,27 @@ public class GameControl : MonoBehaviour
         this.UpdateScoreTexts();
     }
 
+    private void UpdateStartText()
+    {
+        string text = "Player ";
+        text += GameControl.Player1Santa ? "2" : "1";
+        text += "\nPress Start";
+
+        this.RestartText.text = text;
+    }
+
     public void UpdateScoreTexts()
     {
         if (GameControl.Player1Santa)
         {
-            this.Player1ScoreText.color = Color.red;
-            this.Player2ScoreText.color = Color.blue;
+
+            this.Player1ScoreText.color = this.ColorRed;
+            this.Player2ScoreText.color = this.ColorBlue;
         }
         else
         {
-            this.Player1ScoreText.color = Color.blue;
-            this.Player2ScoreText.color = Color.red;
+            this.Player1ScoreText.color = this.ColorBlue;
+            this.Player2ScoreText.color = this.ColorRed;
         }
 
         this.Player1ScoreText.text = "Player 1: " + GameControl.Player1Score;

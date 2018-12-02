@@ -11,6 +11,7 @@ public class PlayerInput
         X,
         Y,
         R1,
+        Start,
         Count
     }
 
@@ -65,6 +66,7 @@ public class PlayerInput
     private const string InputFrost2 = "Frost 2";
     private const string InputFrost3 = "Frost 3";
     private const string InputFrost4 = "Frost 4";
+    private const string InputStart = "Start";
 
     public PlayerInput(PlayerIndex index, KeyboardLayout layout)
     {
@@ -135,6 +137,9 @@ public class PlayerInput
                         case KeyboardLayout.NumberRow: pressed = pressed || Input.GetButton(PlayerInput.InputSanta0); break;
                         case KeyboardLayout.NumPad: pressed = pressed || Input.GetButton(PlayerInput.InputFrost0); break;
                     }
+                    break;
+                case Button.Start:
+                    pressed = (state.Buttons.Start == ButtonState.Pressed) || Input.GetButton(PlayerInput.InputStart);
                     break;
             }
 

@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df997dab757b9e409de905cdc4022fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Skills: {fileID: 0}
 --- !u!114 &114513374613705834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -66,6 +65,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Blizzard: 0
   ManualLaunch: 0
+  BlizzardSound: {fileID: 8300000, guid: 9ea17f9d29b01e445949ecad5b0bf21d, type: 3}
   ThrowForce: 30
   BlizzardInterval: 0.9
   BlizzardDuration: 4.6

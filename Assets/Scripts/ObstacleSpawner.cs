@@ -10,7 +10,9 @@ public class ObstacleSpawner : MonoBehaviour
     public float exitBorder = -15;                                  //X coordinate indicating end of camera view.
     public float entryBorder = 15;                                  //X coordinate indicating start of camera view.
     public float spawnHeight = -2;                                  //Y coordinate of spawned obstacles.
-    public float obstacleSpacing = 3;                              // Minimum space between objects
+    public float obstacleSpacing = 3;                               // Minimum space between objects
+    public float startSpacing = 20;
+    public float widthFix = 4;
 
     public int rngMax = 6;                                          // Rng generator upper bound
 
@@ -48,9 +50,9 @@ public class ObstacleSpawner : MonoBehaviour
         for (int i = 0; i < activeObstaclesSize; i++)
         {
             int randomOffSet = UnityEngine.Random.Range(0, rngMax);
-            modifiedSpawnPos.x = spawnPos.x + randomOffSet;
-            //Debug.Log("New spawn pos: " + spawnPos.x);
-            //Debug.Log("Modified new spawn pos: " + modifiedSpawnPos.x);
+            modifiedSpawnPos.x = spawnPos.x + randomOffSet + startSpacing;
+            Debug.Log("New spawn pos: " + spawnPos.x);
+            Debug.Log("Modified new spawn pos: " + modifiedSpawnPos.x);
             //Debug.Log("i: " + i);
             //Debug.Log(spawnQueue[i]);
             //Debug.Log("Length: " +activeObstacles.Length + "Size: " + activeObstaclesSize);
@@ -69,21 +71,32 @@ public class ObstacleSpawner : MonoBehaviour
     //Moves obstacles when game is not over.
 	void Update()
 	{
- 
 		if (GameControl.instance.gameOver == false) 
 		{	
 			if( activeObstacles[currentObstacle].transform.position.x <= exitBorder )
             {
                 spawnPos.x = activeObstacles[currentObstacle].transform.position.x + distance + obstacleSpacing;
-                //Debug.Log("New position: " + spawnPos.x);
+                Debug.Log("Obstacle: " + currentObstacle + " New position: " + spawnPos.x);
 
                 int randomOffSet = UnityEngine.Random.Range(0, rngMax);
                 modifiedSpawnPos.x = spawnPos.x + randomOffSet;
+                Debug.Log("Obstacle: " + currentObstacle + " Modified position: " + modifiedSpawnPos.x);
 
+                int previousIndex = currentObstacle - 1;
+                if(previousIndex < 0)
+                {
+                    previousIndex = activeObstaclesSize - 1;
+                }
+
+                if(modifiedSpawnPos.x <= activeObstacles[previousIndex].transform.position.x + widthFix)
+                {
+                    modifiedSpawnPos.x += widthFix;
+                }
                 activeObstacles[currentObstacle].transform.position = modifiedSpawnPos;
 
+                activeObstacles[currentObstacle].GetComponent<ObstacleComponent>().Reset();
                 //spawnPos.x += obstacleSpacing;
-                currentObstacle++;
+                currentObstacle++;               
 
                 if(currentObstacle == activeObstaclesSize)
                 {

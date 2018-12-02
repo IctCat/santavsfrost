@@ -32,6 +32,9 @@ public class SantaComponent : MonoBehaviour
     [SerializeField]
     private float MaximumHorizontalSpeed = 1f;
 
+    [SerializeField]
+    private float GiftCooldown = 1f;
+
     [System.NonSerialized]
     public Rigidbody2D[] SleighBodies;
 
@@ -48,6 +51,8 @@ public class SantaComponent : MonoBehaviour
     private int GiftCount;
     private int MaximumGiftCount { get { return this.SackSprites.Length - 1;  } }
 
+    private float GiftCooldownTimestamp;
+    
     public AudioClip[] Hohos;
     public AudioClip RefillSound;
     public AudioClip ReindeerHitSound;
@@ -74,6 +79,8 @@ public class SantaComponent : MonoBehaviour
         this.Sleigh = this.GetComponentInChildren<SleighComponent>();
         this.Sleigh.Initialize();
 
+        this.GiftCooldownTimestamp = Time.time;
+
         this.Reindeers = new List<ReindeerComponent>(this.InitialReindeerCount);
 
         for (int i = 0; i < this.InitialReindeerCount; i++)
@@ -93,6 +100,11 @@ public class SantaComponent : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if (GameControl.instance.gameOver)
+        {
+            return;
+        }
+
         if (this.PlayerInput.GetButtonDown(PlayerInput.Button.A))
         {
             this.ActiveReindeerJump(0);
@@ -162,12 +174,20 @@ public class SantaComponent : MonoBehaviour
             this.Reindeers[i].LineRenderer.SetPosition(1, endPoint);
         }
 
+        // Santa sway
+        this.SantaRigidbody.transform.rotation = Quaternion.AngleAxis(15 * Mathf.Sin(2 * Time.time), Vector3.forward);
+
         // Reset input
         this.PlayerInput.ResetInput();
     }
 
     public void DropGift()
     {
+        if (this.GiftCooldownTimestamp > Time.time)
+        {
+            return;
+        }
+
         if (this.GiftCount > 0)
         {
             GameObject go = Object.Instantiate<GameObject>(this.GiftPrefab, null, false);
@@ -175,12 +195,11 @@ public class SantaComponent : MonoBehaviour
             GiftComponent gift = go.GetComponent<GiftComponent>();
             gift.Rigidbody.AddForce(Quaternion.AngleAxis(-15, Vector3.forward) * Vector3.up * 2f, ForceMode2D.Impulse);
             gift.Rigidbody.AddTorque(0.1f, ForceMode2D.Impulse);
-            // Gift color.
-            gift.BoxRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
-            gift.WrappingRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
 
             this.GiftCount--;
             this.SackRenderer.sprite = this.SackSprites[this.MaximumGiftCount - this.GiftCount];
+
+            this.GiftCooldownTimestamp = Time.time + this.GiftCooldown;
 
             SFXPlayer.Instance.Play(Hohos[Random.Range(0, Hohos.Length)]);
         }
