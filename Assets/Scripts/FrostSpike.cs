@@ -24,8 +24,6 @@ public class FrostSpike : ObstacleComponent
 
     public void Launch()
     {
-        _rb.simulated = true;
-        _rb.gravityScale = 0;
         _rb.velocity.Set(0, LaunchVelocity);
         _rb.isKinematic = false;
         _launched = true;
@@ -35,9 +33,7 @@ public class FrostSpike : ObstacleComponent
     {
         if (_rb != null)
         {
-            _rb.simulated = false;
-            _rb.gravityScale = 0;
-            _rb.velocity.Set(0, 0);
+            _rb.velocity.Set(_rb.velocity.x, 0);
             _rb.isKinematic = true;
             _launched = false;
         }
