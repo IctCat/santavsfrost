@@ -25,7 +25,7 @@ public class FrostSkills : MonoBehaviour {
         }
     }
 
-    float ThrowForce = 15.0f;
+    float ThrowForce = 5.0f;
     public float BlizzardInterval = 0.9f;
     public float BlizzardDuration = 4.6f;
     public float BlizzardCooldown = 10.0f;
