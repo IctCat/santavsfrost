@@ -6,6 +6,9 @@ using UnityEngine;
 public class FrostSkills : MonoBehaviour {
     public bool Blizzard = false;
     public bool ManualLaunch = false;
+    public AudioClip BlizzardSound;
+
+    bool _soundPlayed = false;
 
     List<FrostSpike> _spikes = new List<FrostSpike>();
 
@@ -46,6 +49,12 @@ public class FrostSkills : MonoBehaviour {
 	void Update () {
         if (Blizzard)
         {
+            FrostCloud.MoodAngry = true;
+            if (!_soundPlayed)
+            {
+                SFXPlayer.Instance.Play(BlizzardSound);
+                _soundPlayed = true;
+            }
             _blizzardTimer -= Time.deltaTime;
             _blizzardDurationTimer += Time.deltaTime;
 
@@ -62,6 +71,8 @@ public class FrostSkills : MonoBehaviour {
             {
                 _blizzardDurationTimer = 0;
                 Blizzard = false;
+                _soundPlayed = false;
+                FrostCloud.MoodAngry = false;
             }
         }
         if(ManualLaunch)

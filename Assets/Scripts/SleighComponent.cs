@@ -25,10 +25,16 @@ public class SleighComponent : SleighUnitComponent
         {
             ObstacleComponent obstacle = go.GetComponent<ObstacleComponent>();
 
-            if (obstacle != null)
+            if (obstacle != null && obstacle.tag != "GiftTree")
             {
+                SFXPlayer.Instance.Play(GameControl.instance.Santa.DeathSound);
                 GameControl.instance.Santa.ReleaseSleigh();
                 GameControl.instance.SantaDied();
+            }
+            else if (obstacle != null && obstacle.tag == "GiftTree")
+            {
+                GameControl.instance.Santa.RestockGifts();
+                SFXPlayer.Instance.Play(GameControl.instance.Santa.RefillSound);
             }
         }
     }

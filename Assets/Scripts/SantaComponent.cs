@@ -49,6 +49,9 @@ public class SantaComponent : MonoBehaviour
     private int MaximumGiftCount { get { return this.SackSprites.Length - 1;  } }
 
     public AudioClip[] Hohos;
+    public AudioClip RefillSound;
+    public AudioClip ReindeerHitSound;
+    public AudioClip DeathSound;
 
     public void Start()
     {

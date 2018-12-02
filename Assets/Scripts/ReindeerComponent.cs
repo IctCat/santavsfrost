@@ -49,10 +49,11 @@ public class ReindeerComponent : SleighUnitComponent
         {
             ObstacleComponent obstacle = go.GetComponent<ObstacleComponent>();
 
-            if (obstacle != null)
+            if (obstacle != null && obstacle.tag != "GiftTree")
             {
+                SFXPlayer.Instance.Play(GameControl.instance.Santa.ReindeerHitSound);
                 GameControl.instance.Santa.RemoveReindeer(this);
-            }
+            } 
         }
     }
 

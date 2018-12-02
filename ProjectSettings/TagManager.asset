@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Scenery
   - SantaPlayer
+  - GiftTree
   layers:
   - Default
   - TransparentFX

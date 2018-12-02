@@ -6,7 +6,7 @@ public class FrostCloud : MonoBehaviour {
     float _hover1 = 0;
     float _hover2 = 0;
     public float HoverSpeed = 0.01f;
-    public bool MoodAngry = false;
+    public static bool MoodAngry = false;
     public Transform FrostParent;
     Vector3 _offset = new Vector3();
     public Transform AngryCloud;

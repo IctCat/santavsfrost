@@ -130,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1344622475544702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: -1.39, z: 0}
+  m_LocalPosition: {x: -9, y: -2.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4563818970517684}
@@ -407,6 +407,18 @@ MonoBehaviour:
   HorizontalMovementRange: 3
   HorizontalAcceleration: 10
   MaximumHorizontalSpeed: 4
+  Hohos:
+  - {fileID: 8300000, guid: daf5bb6b19628b34ea6d80168c77899c, type: 3}
+  - {fileID: 8300000, guid: 1d4a23ccdedbf9b44b032d1d856753cf, type: 3}
+  - {fileID: 8300000, guid: a6471e96f1ad2f649bb9304b8df15804, type: 3}
+  - {fileID: 8300000, guid: 300f6fa011ccf77489704acdaa5de3dd, type: 3}
+  - {fileID: 8300000, guid: 83572e71753874646bd106dc18b18263, type: 3}
+  - {fileID: 8300000, guid: e18bf22b2ee2352439728c202d0d7e00, type: 3}
+  - {fileID: 8300000, guid: ab35299d1eae3724985e8581a91e610f, type: 3}
+  - {fileID: 8300000, guid: 00ef2a05a5dd3dd4e8644e91970c3939, type: 3}
+  RefillSound: {fileID: 8300000, guid: 8bdcf715657074544a7eaf041332e10f, type: 3}
+  ReindeerHitSound: {fileID: 8300000, guid: b4c8e4c01cb6055458f7efa9c7b82580, type: 3}
+  DeathSound: {fileID: 8300000, guid: 3813e81dfa4aa194995d20927f0ec268, type: 3}
 --- !u!114 &114770621770293164
 MonoBehaviour:
   m_ObjectHideFlags: 1
