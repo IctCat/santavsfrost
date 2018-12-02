@@ -19,7 +19,7 @@ public class MusicPlayer : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        if (Object.FindObjectOfType<MusicPlayer>() != null)
+        if (GameObject.FindObjectsOfType<MusicPlayer>().Length > 1)
         {
             Object.Destroy(this.gameObject);
             return;
@@ -28,13 +28,13 @@ public class MusicPlayer : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         _as.clip = Song;
         _as.Play();
-        _as.volume = 0.3f;
+        _as.volume = 0.1f;
         StartCoroutine(FadeIn());
 	}
 
     IEnumerator FadeIn()
     {
-        while (_as.volume < 0.8f)
+        while (_as.volume < 0.3f)
         {
             _as.volume += FadeInRate;
             yield return new WaitForEndOfFrame();
