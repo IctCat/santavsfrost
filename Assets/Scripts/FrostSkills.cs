@@ -74,7 +74,10 @@ public class FrostSkills : MonoBehaviour {
             {
                 foreach (Rigidbody2D rb in GameControl.instance.Santa.SleighBodies)
                 {
-                    rb.AddForce(Vector2.up * (UnityEngine.Random.value*0.5f+0.5f) * (UnityEngine.Random.value < 0.5f ? 1.0f : -1.0f) * ThrowForce, ForceMode2D.Impulse);
+                    if (rb != null)
+                    {
+                        rb.AddForce(Vector2.up * (UnityEngine.Random.value * 0.5f + 0.5f) * (UnityEngine.Random.value < 0.5f ? 1.0f : -1.0f) * ThrowForce, ForceMode2D.Impulse);
+                    }
                 }
                 _blizzardTimer = BlizzardInterval;
             }
