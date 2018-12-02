@@ -167,6 +167,9 @@ public class SantaComponent : MonoBehaviour
             this.Reindeers[i].LineRenderer.SetPosition(1, endPoint);
         }
 
+        // Santa sway
+        this.SantaRigidbody.transform.rotation = Quaternion.AngleAxis(15 * Mathf.Sin(2 * Time.time), Vector3.forward);
+
         // Reset input
         this.PlayerInput.ResetInput();
     }
