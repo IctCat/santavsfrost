@@ -12,6 +12,7 @@ public class ObstacleSpawner : MonoBehaviour
     public float spawnHeight = -2;                                  //Y coordinate of spawned obstacles.
     public float obstacleSpacing = 3;                               // Minimum space between objects
     public float startSpacing = 20;
+    public float widthFix = 4;
 
     public int rngMax = 6;                                          // Rng generator upper bound
 
@@ -81,6 +82,16 @@ public class ObstacleSpawner : MonoBehaviour
                 modifiedSpawnPos.x = spawnPos.x + randomOffSet;
                 Debug.Log("Obstacle: " + currentObstacle + " Modified position: " + modifiedSpawnPos.x);
 
+                int previousIndex = currentObstacle - 1;
+                if(previousIndex < 0)
+                {
+                    previousIndex = activeObstaclesSize - 1;
+                }
+
+                if(modifiedSpawnPos.x <= activeObstacles[previousIndex].transform.position.x + widthFix)
+                {
+                    modifiedSpawnPos.x += widthFix;
+                }
                 activeObstacles[currentObstacle].transform.position = modifiedSpawnPos;
 
                 //spawnPos.x += obstacleSpacing;
