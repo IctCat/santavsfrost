@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GiftComponent : MonoBehaviour
 {
@@ -15,8 +16,31 @@ public class GiftComponent : MonoBehaviour
     {
         this.TargetTransform = null;
 
-        this.BoxRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
-        this.WrappingRenderer.color = new Color(Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f), Random.Range(0.5f, 0.9f));
+        List<Color> colors = new List<Color>();
+        colors.Add(new Color(1f, 0.5f, 0.5f));
+        colors.Add(new Color(0.5f, 1f, 0.5f));
+        colors.Add(new Color(0.5f, 0.5f, 1f));
+        colors.Add(new Color(1f, 1f, 0.5f));
+        colors.Add(new Color(1f, 0.5f, 1f));
+        colors.Add(new Color(0.5f, 1f, 1f));
+
+        colors.Add(new Color(1f, 0.75f, 0.5f));
+        colors.Add(new Color(1f, 0.5f, 0.75f));
+        colors.Add(new Color(0.5f, 1f, 0.75f));
+        colors.Add(new Color(0.75f, 1f, 0.5f));
+        colors.Add(new Color(0.75f, 0.5f, 1f));
+        colors.Add(new Color(0.5f, 0.75f, 1f));
+
+        int a = Random.Range(0, colors.Count);
+        Color box = colors[a];
+        colors.RemoveAt(a);
+
+        int b = Random.Range(0, colors.Count);
+        Color wrapping = colors[b];
+        colors.RemoveAt(b);
+
+        this.BoxRenderer.color = box;
+        this.WrappingRenderer.color = wrapping;
     }
 
     public void FixedUpdate()

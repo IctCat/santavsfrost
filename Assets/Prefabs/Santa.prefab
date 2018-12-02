@@ -434,6 +434,8 @@ MonoBehaviour:
   LineAnchor: {fileID: 4315725849563282}
   DiveForce: 1000
   GiftDropAnchor: {fileID: 4640137937112208}
+  SackTransform: {fileID: 4683924962317620}
+  TreeGifts: []
 --- !u!212 &212030662876367374
 SpriteRenderer:
   m_ObjectHideFlags: 1

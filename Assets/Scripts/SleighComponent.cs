@@ -8,6 +8,9 @@ public class SleighComponent : SleighUnitComponent
     private float DiveForce = 10;
 
     public Transform GiftDropAnchor;
+    public Transform SackTransform;
+
+    public GiftComponent[] TreeGifts;
 
     public void OnTriggerEnter2D(Collider2D collider)
     {
@@ -17,6 +20,32 @@ public class SleighComponent : SleighUnitComponent
     public void OnCollisionEnter2D(Collision2D collision)
     {
         this.Collision(collision.gameObject);
+    }
+
+    public void FixedUpdate()
+    {
+        for (int i = 0; i < this.TreeGifts.Length; i++)
+        {
+            if (this.TreeGifts[i] == null)
+            {
+                continue;
+            }
+
+            this.TreeGifts[i].Transform.SetParent(null, true);
+            Vector2 position = this.TreeGifts[i].transform.position;
+            position = Vector2.Lerp(position, this.SackTransform.position, 3f * Time.fixedDeltaTime);
+            position = Vector2.MoveTowards(position, this.SackTransform.position, 3f * Time.fixedDeltaTime);
+
+            if (Vector2.Distance(this.SackTransform.position, position) < 0.1f)
+            {
+                SFXPlayer.Instance.Play(GameControl.instance.Santa.RefillSound);
+                Object.Destroy(this.TreeGifts[i].gameObject);
+            }
+            else
+            {
+                this.TreeGifts[i].transform.position = position;
+            }
+        }
     }
 
     private void Collision(GameObject go)
@@ -34,8 +63,10 @@ public class SleighComponent : SleighUnitComponent
             }
             else if (obstacle != null && obstacle.tag == "GiftTree")
             {
+                ChristmasTreeComponent tree = obstacle.GetComponent<ChristmasTreeComponent>();
+                this.TreeGifts = tree.GetGifts();
+
                 GameControl.instance.Santa.RestockGifts();
-                SFXPlayer.Instance.Play(GameControl.instance.Santa.RefillSound);
             }
         }
     }
