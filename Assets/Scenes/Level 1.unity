@@ -219,6 +219,21 @@ Prefab:
       propertyPath: spawnOrder
       value: 0 1 2 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
+        type: 2}
+      propertyPath: exitBorder
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
+        type: 2}
+      propertyPath: obstacleSpacing
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114680899246836434, guid: 2dc4a62909220d742aa4e24a45f13e90,
+        type: 2}
+      propertyPath: rngMax
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114037180198074100, guid: 2dc4a62909220d742aa4e24a45f13e90, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 2dc4a62909220d742aa4e24a45f13e90, type: 2}
@@ -487,6 +502,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 4368203919501838, guid: cc934f51fc632524786844dca51b4475, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc934f51fc632524786844dca51b4475, type: 2}
   m_IsPrefabAsset: 0
@@ -533,6 +552,11 @@ Prefab:
     - target: {fileID: 4207787492597496, guid: 213b77bd28e044f4291fe8d115556558, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114276679907972504, guid: 213b77bd28e044f4291fe8d115556558,
+        type: 2}
+      propertyPath: ScrollSpeed
+      value: -100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213b77bd28e044f4291fe8d115556558, type: 2}
