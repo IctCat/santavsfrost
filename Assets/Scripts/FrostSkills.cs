@@ -42,7 +42,6 @@ public class FrostSkills : MonoBehaviour {
         {
             if(spike != null) spike.Launch();
         }
-        _spikes.Clear();
     }
 
 	// Update is called once per frame

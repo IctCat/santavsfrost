@@ -24,16 +24,18 @@ public class FrostSpike : ObstacleComponent
 
     public void Launch()
     {
-        _rb.velocity.Set(0, LaunchVelocity);
-        _rb.isKinematic = false;
-        _launched = true;
+        if (!_launched)
+        {
+            _rb.isKinematic = false;
+            _rb.velocity.Set(0, LaunchVelocity);
+            _launched = true;
+        }
     }
 
     public override void Reset()
     {
         if (_rb != null)
         {
-            Debug.Log("Reset");
             _rb.velocity = new Vector2(_rb.velocity.x, 0);
             _rb.isKinematic = true;
             _launched = false;
