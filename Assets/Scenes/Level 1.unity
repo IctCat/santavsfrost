@@ -215,7 +215,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -9
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 4351307361285902, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
       propertyPath: m_LocalPosition.y
@@ -245,12 +245,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114430814281536270, guid: 1007318d97c9b774981d7ef070ed2c6f,
-        type: 2}
-      propertyPath: ReindeerPrefab
-      value: 
-      objectReference: {fileID: 1110805560246526, guid: 2542ef87cbaa8c040a758593aa7435ec,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1007318d97c9b774981d7ef070ed2c6f, type: 2}
   m_IsPrefabAsset: 0
