@@ -38,5 +38,7 @@ public class FrostSpike : ObstacleComponent
         _rb.velocity.Set(0, 0);
         _rb.isKinematic = true;
         _launched = false;
+
+        base.Reset();
     }
 }
