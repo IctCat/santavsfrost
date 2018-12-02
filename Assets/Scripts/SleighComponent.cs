@@ -30,6 +30,7 @@ public class SleighComponent : SleighUnitComponent
                 SFXPlayer.Instance.Play(GameControl.instance.Santa.DeathSound);
                 GameControl.instance.Santa.ReleaseSleigh();
                 GameControl.instance.SantaDied();
+                FrostCloud.Triggered = true;
             }
             else if (obstacle != null && obstacle.tag == "GiftTree")
             {

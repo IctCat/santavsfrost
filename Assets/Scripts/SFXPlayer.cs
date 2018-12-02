@@ -12,6 +12,6 @@ public class SFXPlayer : MonoBehaviour {
     }
     public void Play(AudioClip clp)
     {
-        _src.PlayOneShot(clp);
+        if(_src != null) _src.PlayOneShot(clp);
     }
 }
